@@ -294,11 +294,11 @@ The following Tab.4 enumerates various instances of Motif 10 for $G_{\text{schiz
 ###### Analysis of Motif ID 12:
 
 <a href="images/motif_graph_12.png">
-    <img src="images/motif_graph_12.png" alt="State Distibution of Motif ID 12" style="margin-left: 300px;  margin-bottom: 0px; scale: .8">
+    <img src="images/motif_graph_12.png" alt="State Distibution of Motif ID 12" style="margin-left: 0px;  margin-bottom: 0px; scale: .8">
 </a>
 
-Fig.13, Motif 12 offers a detailed perspective on specific subgraph patterns within the overarching graph $G$. This motif is particularly noteworthy for its varied configurations of microstates, revealing certain predominant transitions, especially between states $A⇄C$.
-$A→B→C$ acts as a transient attractor. Since $A⇄C$, the system can transition to $C$ from $A$ or $B$.  
+Fig.13, Motif 12 offers a detailed perspective on specific subgraph patterns within the overarching graph $G$. 
+  
 <!-- One vertex has directed edges to the other two, and there is one mutual connection $A→B→C, A⇄C$. -->
 
 <a href="images/state_counts_significance_motif_id_12.png">
