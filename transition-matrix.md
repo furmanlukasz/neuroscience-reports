@@ -55,7 +55,7 @@ The bootstrap histogram is as follows:  \[ \text{Histogram}(\text{Bootstrap Diff
     <img src="images/transition/bootstrap_histogram.png" alt="Bootstrap Histogram" style="margin-left: 0px; scale: 0.9">
 </a>
 
-Fig.10 Bootstrap histogram showcasing the differences in correlations.
+Fig.4 Bootstrap histogram showcasing the differences in correlations.
 
 Now, we can construct transition matrices for both the healthy and schizophrenia groups, providing a quantitative framework to examine the state transitions.
 
@@ -82,7 +82,7 @@ Since the transition matrix is a square matrix, it can be visualized as a heatma
 </a>
 
 
-Fig.1 Transition matrix $T_{healthy}$ for the healthy group. The rows represent the source states, and the columns represent the destination states. The entry $T_{ij}$ represents the number of transitions from state $i$ to state $j$. The diagonal entries are set to $1$, for visualization purposes.
+Fig.5 Transition matrix $T_{healthy}$ for the healthy group. The rows represent the source states, and the columns represent the destination states. The entry $T_{ij}$ represents the number of transitions from state $i$ to state $j$. The diagonal entries are set to $1$, for visualization purposes.
 
 
 <a href="images/schizo_matrix.png">
@@ -90,7 +90,7 @@ Fig.1 Transition matrix $T_{healthy}$ for the healthy group. The rows represent 
 </a>
 
 
-Fig.2 Transition matrix $T_{schizo}$ for the schizophrenia group. The rows represent the source states, and the columns represent the destination states. The entry $T_{ij}$ represents the number of transitions from state $i$ to state $j$. The diagonal entries are set to $1$, for visualization purposes.
+Fig.6 Transition matrix $T_{schizo}$ for the schizophrenia group. The rows represent the source states, and the columns represent the destination states. The entry $T_{ij}$ represents the number of transitions from state $i$ to state $j$. The diagonal entries are set to $1$, for visualization purposes.
 
 The analysis of transition matrices for the healthy and schizophrenia groups provides a comprehensive understanding of state transition dynamics in these populations. The matrices, visualized in Figures 1 and 2, offer a macroscopic view of how frequently each state transitions to another. Before we transform the transition matrices into a probability matrix lets delve deeper into the characteristics of these transitions.
 
@@ -141,7 +141,7 @@ $$ \text{Frobenius Norm with Self-Transitions} = 22220 $$
     <img src="images/transition/self_transition_counts.png" alt="Self-Transitions-counts" style="margin-left: 0px; scale: 0.9">
 </a>
 
-Fig.3 Self-transition ocurrences in the healthy and schizophrenia groups. 
+Fig.7 Self-transition ocurrences in the healthy and schizophrenia groups. 
 
 ---
 #### Distribution of Transitions
@@ -165,7 +165,7 @@ $$ \text{Frobenius Norm without Self-Transitions} = 922 $$
     <img src="images/transition/transition_counts.png" alt="Transitions-counts" style="margin-left: 0px; scale: 0.9">
 </a>
 
-Fig.4 Transition ocurrences in the healthy and schizophrenia groups.
+Fig.8 Transition ocurrences in the healthy and schizophrenia groups.
 
 Dealing with self-loops in transition matrices, especially when analyzing sequences of states in contexts like EEG microstate analysis, requires careful consideration. Self-loops, representing transitions from a state to itself, can disproportionately influence the analysis. That from now we separate the self-loops from the transition matrices and analyze them separately. But first, let's transform the transition matrices into probability matrices.
 
@@ -238,7 +238,7 @@ $$ \text{Correlation Coefficient} = 0.99 $$
     <img src="images/transition/transition_probabilities_self.png" alt="transition_probabilities_self" style="margin-bottom: 50px; margin-top: 50px; scale: 1.2;">
 </a>
 
-We can see that due to the high number of self-transitions, the transition probability matrices are dominated by the diagonal entries. This is reflected in the high correlation coefficient and low Frobenius norm, which indicate a high degree of similarity between the two groups. However, this is misleading, as the self-transitions are not indicative of the actual transition dynamics between states but rather the tendency of each group to remain in the same state. And this is of course informative as we saw on count distributions of self-transitions. But it is not what we are looking for. We are interested in the transitions between states. So let's remove the self-transitions from the transition matrices and see what happens.
+Fig.9 We can see that due to the high number of self-transitions, the transition probability matrices are dominated by the diagonal entries. This is reflected in the high correlation coefficient and low Frobenius norm, which indicate a high degree of similarity between the two groups. However, this is misleading, as the self-transitions are not indicative of the actual transition dynamics between states but rather the tendency of each group to remain in the same state. And this is of course informative as we saw on count distributions of self-transitions. But it is not what we are looking for. We are interested in the transitions between states. So let's remove the self-transitions from the transition matrices and see what happens.
 
 <!-- Transition Probability Matrix - excluding self-transitions -->
 #### Transition Probability Matrix - excluding self-transitions
@@ -255,7 +255,7 @@ $$ \text{Correlation Coefficient} = 0.75 $$
     <img src="images/transition/transition_probabilities_no_self.png" alt="transition_probabilities_no_self" style="margin-bottom: 50px; margin-top: 50px; scale: 1.2;">
 </a>
 
-We can see that the Frobenius norm is much higher and the correlation coefficient is much lower. This is because the self-transitions are not influencing the analysis. The transition probability matrices are now dominated by the off-diagonal entries, which reflect the actual transition dynamics between states. This is what we are looking for. 
+Fig.10 We can see that the Frobenius norm is much higher and the correlation coefficient is much lower. This is because the self-transitions are not influencing the analysis. The transition probability matrices are now dominated by the off-diagonal entries, which reflect the actual transition dynamics between states. This is what we are looking for. 
 
 <!-- Transition Probability Matrix -> Directed Graph -->
 #### Direct Graph
@@ -280,7 +280,7 @@ $$ \text{Frobenius Norm} = 0.61 $$
     <img src="images/transition/graphs_prob.png" alt=" Directed Graph" style="margin-bottom: 50px; margin-top: 50px; scale: 1.0;">
 </a>
 
-Fig.5 and Fig.6 illustrate the directed graphs for the healthy and schizophrenia groups, respectively. The vertices represent the unique states, while the edges depict the transitions with probabilities surpassing the pruning threshold. These graphs provide a visual representation of the most likely transitions, as well as insights into the overall structure and connectivity of the state dynamics. The position and color of the vertices is the same for both graphs as well labels for the vertices.  The thickness of the edges is proportional to the probability of the transition. The size of the node it its degree, i.e., the number of edges connected to it.
+Fig.11 and Fig.12 illustrate the directed graphs for the healthy and schizophrenia groups, respectively. The vertices represent the unique states, while the edges depict the transitions with probabilities surpassing the pruning threshold. These graphs provide a visual representation of the most likely transitions, as well as insights into the overall structure and connectivity of the state dynamics. The position and color of the vertices is the same for both graphs as well labels for the vertices.  The thickness of the edges is proportional to the probability of the transition. The size of the node it its degree, i.e., the number of edges connected to it.
 
 The analysis of these graphs can elucidate characteristics such as resilience, adaptability, and potential biomarkers within the EEG microstate sequences for each group. The directed graphs not only emphasize the significant transitions but also pave the way for identifying key differences in the neurological patterns associated with healthy and schizophrenic brains. We see now that performing analysis with self-transitions included in the transition matrices can lead to misleading results. 
 
