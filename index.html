@@ -19,7 +19,9 @@
 
 				<!-- Intro -->
 					<div id="intro">
-						<h1>Datalab108<br /></h1>
+
+						<blockquote id="daily-proverb" > </blockquote><!-- Proverb will be displayed here -->
+						<!-- <h1>Datalab108<br /></h1> -->
 						<p>Neuroscience | Cybernetics | Data Mining </p>
 						<ul class="actions">
 							<li><a href="#nav" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
@@ -35,7 +37,7 @@
 					<nav id="nav">
 						<ul class="links">
 							<li class="active"><a href="index.html">Science Reports</a></li>
-							<li><a href="generic.html">Blog</a></li>
+							<!-- <li><a href="generic.html">Blog</a></li> -->
 							<!-- <li><a href="elements.html">Elements Reference</a></li> -->
 						</ul>
 						<!-- <ul class="icons">
@@ -52,20 +54,46 @@
 						<!-- Featured Post -->
 							<article class="post featured">
 								<header class="major">
-									<span class="date">December 9, 2023</span>
-									<h2><a href="transition-matrix.html">correlations & differences<br />
-										in schizophrenia</a></h2>
-									<p>Analysis of EEG Microstate Sequences in Healthy and Schizophrenic Individuals</p>
+									<span class="date">December 13, 2023</span>
+									<h2><a href="classification.html">Classification <br />
+										in Schizophrenia</a></h2>
+									<p>Classification of Transition Probability Matrix (TPM) between Healthy and Schizophrenia Groups</p>
 								</header>
-								<a href="transition-matrix.html" class="image main"><img src="images/transition/correlation_matrices.png" alt="" /></a>
+								<a href="classification.html" class="image main"><img src="images/classification/classification.png" alt="" /></a>
 								<ul class="actions special">
-									<li><a href="transition-matrix.html" class="button small">Full Story</a></li>
+									<li><a href="classification.html" class="button small">Full Story</a></li>
 								</ul>
 							</article>
 
 						<!-- Posts -->
 							<section class="posts">
-								<article class="post featured">
+								<article>
+									<header class="major">
+										<span class="date">December 11, 2023</span>
+										<h2><a href="transition-probability-matrix.html">Transition Probability Matrix (TPM)<br />
+											in schizophrenia</a></h2>
+										<p>EEG Microstate Sequences → Transition Probability Matrix (TPM)</p>
+									</header>
+									<a href="transition-probability-matrix.html" class="image main"><img src="images/transition/transition_probabilities_no_self.png" alt="" /></a>
+									<ul class="actions special">
+										<li><a href="transition-probability-matrix.html" class="button small">Full Story</a></li>
+									</ul>
+								</article>
+
+								<article>
+									<header class="major">
+										<span class="date">December 9, 2023</span>
+										<h2><a href="correlation-matrices.html">correlations & differences<br />
+											in schizophrenia</a></h2>
+										<p>Correlation Matrices of EEG Microstate Sequences in Healthy and Schizophrenic Individuals</p>
+									</header>
+									<a href="correlation-matrices.html" class="image main"><img src="images/transition/correlation_matrices.png" alt="" /></a>
+									<ul class="actions special">
+										<li><a href="correlation-matrices.html" class="button small">Full Story</a></li>
+									</ul>
+								</article>
+
+								<article>
                                     <header class="major">
                                         <span class="date">December 6, 2023</span>
                                         <h2><a href="motifs.html">microstates dynamics<br />
@@ -159,6 +187,7 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
+							<iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/album/idea-10-slowed-reverb/1648562802?i=1648562803"></iframe>
 							<!-- <form method="post" action="#">
 								<div class="fields">
 									<div class="field">
@@ -181,13 +210,12 @@
 						</section>
 						<section class="split contact">
 							<!-- <section class="alt">
-								<h3>Address</h3>
 								<p>1234 Somewhere Road #87257<br />
-								Nashville, TN 00000-0000</p>
+								Nashville, TN 00000-0000</p> 
 							</section>
 							<section>
 								<h3>Phone</h3>
-								<p><a href="#">(000) 000-0000</a></p>
+								<p><a href="#">(000) 000-0000</a></p> 
 							</section> -->
 							<section>
 								<h3>Email</h3>
@@ -213,6 +241,28 @@
 			</div>
 
 		<!-- Scripts -->
+			<script>
+				// Function to load proverbs and display a daily proverb
+				function loadDailyProverb() {
+					fetch('proverbs.json')
+						.then(response => response.json())
+						.then(proverbs => {
+							// Use current date to seed the random selection
+							const today = new Date();
+							const index = (today.getFullYear() + today.getMonth() + today.getDate()) % proverbs.length;
+			
+							// Select a proverb
+							const dailyProverb = proverbs[index];
+			
+							// Display the proverb
+							document.getElementById('daily-proverb').innerText = dailyProverb;
+						})
+						.catch(error => console.error('Error loading proverbs:', error));
+				}
+			
+				// Call the function on page load
+				window.onload = loadDailyProverb;
+			</script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -220,6 +270,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
 
 	</body>
 </html>
