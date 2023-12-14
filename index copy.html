@@ -11,14 +11,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<script type="importmap">
-			{
-			  "imports": {
-				"three": "https://unpkg.com/three@0.157.0/build/three.module.js",
-				"three/addons/": "https://unpkg.com/three@0.157.0/examples/jsm/"
-			  }
-			}
-		</script>
 	</head>
 	<body class="is-preload">
 
@@ -53,7 +45,7 @@
 							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul/Users/luki/Downloads/glsl-pipeline-bcd947519dade0c6ebb094d0937d49b8d0f16b75/index.js> -->
+						</ul> -->
 					</nav>
 
 				<!-- Main -->
@@ -183,163 +175,6 @@
 			</div>
 
 		<!-- Scripts -->
-
-
-		<script type="module">
-			import { WebGLRenderer, PerspectiveCamera, Scene, BoxGeometry, ShaderMaterial, Mesh, Vector2, Vector3 } from 'three';
-			// import { resolveLygia } from 'resolve-lygia';
-			import resolveLygia from "https://lygia.xyz/resolve.esm.js";
-
-			import { GlslPipeline } from './assets/js/index.js';
-	  
-			let W = window,
-				D = document;
-	  
-			let width = W.innerWidth;
-			let height = W.innerHeight;
-			let pixelRatio = W.devicePixelRatio;
-	  
-			const renderer = new WebGLRenderer();
-			renderer.setPixelRatio(pixelRatio);
-			renderer.setSize(width, height);
-			// D.body.appendChild(renderer.domElement);
-			// W.document.getElementById("intro").appendChild(renderer.domElement);
-			W.document.getElementById("intro").appendChild(renderer.domElement);
-	  
-			const shader_vert = resolveLygia(/* glsl */`
-			uniform float   u_time;
-			uniform vec2	u_mouse;
-	  
-			varying vec2    v_texcoord;
-			varying vec3    v_normal;
-			varying vec4    v_position;
-	  
-			#include "lygia/math/const.glsl"
-			#include "lygia/math/rotate4dX.glsl"
-			#include "lygia/math/rotate4dY.glsl"
-			#include "lygia/math/rotate4dZ.glsl"
-			#include "lygia/generative/snoise.glsl"
-	  
-			void main(void) {
-				v_position = vec4(position, 1.0);
-	  
-				float time = u_time * 2.0; // * u_mouse.x;
-	  
-				mat4 rot =  rotate4dY(time * 0.5) *
-							rotate4dX(time * 0.3) * 
-							rotate4dZ(time * 0.2);
-	  
-				v_position = rot * v_position;
-				// scale to fit the screen
-				v_position.xy *= 0.55;
-				// move a bit up
-				v_position.y += 0.55;
-	  
-				v_normal = normalize( (rot * vec4(normal,1.0)).xyz );
-				// create a bit of glitch on the normal with some noise and step function
-				// v_normal += snoise(v_position.xyz * 2.0) * step(0.5, snoise(v_position.xyz * 10.0));
-				
-
-				v_texcoord = uv;
-				// create a bit of glitch on the uv with some noise and step function
-				v_texcoord += snoise(v_position.xy * 2.0) * step(0.5, snoise(v_position.xy * 10.0));
-				
-				gl_Position = projectionMatrix * modelViewMatrix * v_position;
-			}
-			`);
-	  
-			const shader_frag = resolveLygia(/* glsl */`
-			uniform sampler2D   u_scene;
-			uniform sampler2D   u_doubleBuffer0;
-	  
-			uniform vec2        u_resolution;
-			uniform float       u_time;
-			uniform int         u_frame;
-			uniform vec2		u_mouse;
-	  
-			varying vec2        v_texcoord;
-			varying vec3        v_normal;
-			varying vec4        v_position;
-	  
-			#include "lygia/math/saturate.glsl"
-			#include "lygia/space/ratio.glsl"
-			#include "lygia/space/scale.glsl"
-			#include "lygia/color/mixOklab.glsl"
-			#include "lygia/generative/snoise.glsl"
-			
-			void main() {
-				vec4 color = vec4(vec3(0.0), 1.0);
-				vec2 pixel = 1.0 / u_resolution;
-				vec2 st = gl_FragCoord.xy * pixel;
-				vec2 sst = ratio(st, u_resolution); 
-				vec2 uv = v_texcoord;
-				float time = u_time;// * u_mouse.x; 
-	  
-			#if defined(BACKGROUND)
-				color.a = 0.0;
-	  
-			#elif defined(DOUBLE_BUFFER_0)
-				float n = snoise( vec3(sst * (1.5 + sin(time)) * 5.0, time * 0.5) ) * 0.0025;
-				vec2 st0 = scale(st, 1.0 + n);
-				color = texture2D(u_doubleBuffer0, st0);
-	  
-				vec4 scene = texture2D(u_scene, st);
-				color.rgb = mixOklab(color.rgb, scene.rgb, step(0.99,scene.a));
-				color.a = 0.01;
-				// color.rgb *= color.a;
-				color.rgb = scene.rgb;
-				
-	  
-			#elif defined(POSTPROCESSING)
-				color = texture2D(u_doubleBuffer0, st);
-	  
-			#else
-				color.rgb = v_normal * 0.5 + 0.5;
-				// color.rg = mix(color.rg, uv, saturate(distance(sst, vec2(0.5))*2. ) );
-				vec3 mapColor = vec3(1.0/(255./85.), 1.0/(255./70.), 1.0/(255./63.));
-				color.rgb = mix(color.rgb, mapColor.rgb, saturate(distance(sst, vec2(0.5))*2. ) );
-	  
-			#endif
-				// vec4 fcolor = vec4(color.rgb, .2);
-				// color.rgb *= vec3(1.0/(255./85.), 1.0/(255./70.), 1.0/(255./63.));
-				gl_FragColor = color;
-			}
-			`);
-	  
-			// GLSL Buffers
-			const glsl_sandbox = new GlslPipeline(renderer);
-			glsl_sandbox.load(shader_frag, shader_vert);
-	  
-			const mesh = new Mesh(new BoxGeometry(1, 1, 1), glsl_sandbox.material);
-			const scene = new Scene();
-			const cam = new PerspectiveCamera(45, width / height, 0.001, 200);
-			cam.position.z = 3;
-			scene.add(mesh);
-	  
-			const draw = () => {
-				glsl_sandbox.renderScene(scene, cam);
-				requestAnimationFrame(draw);
-			};
-	  
-			const resize = () => {
-				width = W.innerWidth;
-				height = W.innerHeight;
-				pixelRatio = W.devicePixelRatio;
-	  
-				renderer.setPixelRatio(pixelRatio);
-				renderer.setSize(width, height);
-	  
-				glsl_sandbox.setSize(width, height);
-	  
-				cam.aspect = width / height;
-				cam.updateProjectionMatrix();
-			};
-	  
-			W.addEventListener("resize", resize);
-			resize();
-	  
-			draw();
-		  </script>
 			<script>
 				// Function to load proverbs and display a daily proverb
 				function loadDailyProverb() {
