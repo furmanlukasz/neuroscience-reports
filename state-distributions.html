@@ -1,0 +1,385 @@
+<!DOCTYPE html><html><head>
+      <title>state-distributions</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<!-- add button to go home (index.html) -->
+<div class="home-btn">
+  <a href="index.html">
+    <img src="images/home.png" alt="home" style="width: 50px; height: 50px;">
+  </a>
+<h3 id="eeg-microstate-sequences-a-visual-exploration-of-state-distributions">EEG Microstate Sequences: A Visual Exploration of State Distributions </h3>
+<h4 id="introduction">Introduction </h4>
+<p>This report delves into the statistical distributions and visualizations of EEG microstate sequences, comparing healthy and schizophrenia subjects. Employing a range of analytical and plotting techniques, including bar plots, violin plots, and heatmaps, we aim to uncover patterns and differences in the state distributions between the groups.</p>
+<p>EEG microstate sequences offer a window into the brief periods where the brain's electrical activity is quasi-stable. Understanding the distributions of these states can provide insights into normal and pathological brain functions. This report is a extension of the work presented in  → <a href="correlation-matrices.html">Correlation Matrices of EEG Microstate Sequences in Healthy and Schizophrenic Individuals</a>, which explores the differences in EEG microstate sequences between healthy and schizophrenia subjects. We build upon this work by performing a visual analysis of the state distributions, offering a more granular look at the differences between the groups.</p>
+<h4 id="data-preparation">Data Preparation </h4>
+<p>We begin by loading the EEG microstate sequences for both healthy and schizophrenia subjects. We will focus on the <code>microstate_sequences</code> column, which contains the sequences for each subject. No further data preparation is required, as the sequences are already in the correct format for analysis. Note that in this report we do not use TPMs, as we are only interested in the state distributions - so there is no distinction for state transitions, probabilities, or self-transitions.</p>
+<hr>
+<h4 id="histogram-visualization-of-state-frequencies-in-individuals">Histogram Visualization of State Frequencies in Individuals </h4>
+<p>In this section, we present a series of histograms to visualize the distribution of EEG microstate sequences for individuals. The histograms provide a clear, quantitative view of how frequently each state occurs within each individual's sequence. This approach aims to uncover any characteristic patterns or notable deviations in state occurrences among the both groups.</p>
+<p>For each individual in the schizophrenia group, we construct a histogram that represents the frequency of each state occurring within their EEG sequences. The collection of histograms provides a panoramic view of state distributions across the group, facilitating a comparison between individuals and against typical patterns observed in healthy controls.</p>
+<p><strong>State Distribution Visualization</strong>: Individual state distributions are visualized using bar plots for a granular look at each subject's state frequencies.</p>
+<a href="images/distributions/healthy_bars.png">
+    <img src="images/distributions/healthy_bars.png" alt="Bars Schizo" style="margin-left: 0px; scale: 1.0">
+</a>
+<p>Fig. 1: State distributions for healthy subjects.</p>
+<a href="images/distributions/schizo_bars.png">
+    <img src="images/distributions/schizo_bars.png" alt="Bars Schizo" style="margin-left: 0px; scale: 1.0">
+</a>
+<p>Fig. 2: State distributions for schizophrenia subjects.</p>
+<h5 id="data-transformation-and-structure">Data Transformation and Structure </h5>
+<ul>
+<li><strong>State Counting</strong>: For each sequence, we count the occurrences of each unique state. This counting results in a frequency distribution that serves as the basis for the histogram.</li>
+<li><strong>Histogram Construction</strong>: We create a histogram for each individual, where the x-axis represents the possible states, and the y-axis represents the count of each state within the individual's sequence.</li>
+<li><strong>Multiple Panels</strong>: The visualization is organized into multiple panels, one for each individual, allowing for an easy comparison across the schizophrenia group.</li>
+<li><strong>Histograms</strong>: Each panel contains a histogram detailing the frequency of each state. The height of each bar corresponds to the number of times a particular state occurs within the individual's sequence.</li>
+<li><strong>Axes and Labels</strong>:
+<ul>
+<li>The x-axis labels correspond to the different states, providing a clear indication of which state each bar represents.</li>
+<li>The y-axis shows the count of occurrences for each state, allowing for an assessment of frequency and prevalence.</li>
+<li>The title of each panel indicates the individual's identification within the schizophrenia group.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="violin-plots-for-group-comparison">Violin Plots for Group Comparison </h4>
+<p>In this section, we explore the distribution of microstate counts within the EEG sequences of healthy individuals using violin plots. The aim is to provide a visual representation that captures the distribution and density of each state's occurrences across all subjects in the healthy group. This visualization helps in identifying the commonality and variability of state occurrences within the group.</p>
+<p><strong>Violin Plots for Group Comparison</strong>: Group-wide distributions are explored using violin plots, showcasing the spread and density of state occurrences.</p>
+<a href="images/distributions/healthy_violin.png">
+    <img src="images/distributions/healthy_violin.png" alt="Violin Healthy" style="margin-left: 0px; scale: 1.0">
+</a>
+<p>Fig. 3: Violin plots for healthy subjects.</p>
+<a href="images/distributions/schizo_violin.png">
+    <img src="images/distributions/schizo_violin.png" alt="Violin Schizo" style="margin-left: 0px; scale: 1.0">
+</a>
+<p>Fig. 4: Violin plots for schizophrenia subjects.</p>
+<h5 id="data-transformation-and-structure-1">Data Transformation and Structure </h5>
+<p><strong>Data Preparation</strong>: For each sequence in the both groups, we identify the unique states and count their occurrences within the sequence. This results in a distribution of counts for each state across all sequences.</p>
+<p><strong>Violin Plot Construction</strong>:</p>
+<ul>
+<li><strong>Plotting Framework</strong>: We use Seaborn's violin plot function to create the visualization.</li>
+<li><strong>Data Structure</strong>: The prepared data, an array of count distributions for each state, is used as the input for the violin plot.</li>
+</ul>
+<h5 id="plot-description">Plot Description </h5>
+<ul>
+<li><strong>X-axis (State)</strong>: Represents the different states identified in the EEG sequences. Each violin corresponds to one state and shows the distribution of its counts across all sequences.</li>
+<li><strong>Y-axis (Count)</strong>: Indicates the count of each state's occurrence within individual sequences.</li>
+<li><strong>Violins</strong>: Each violin plot provides a detailed look at the distribution of counts for a specific state. The width of the violin at different counts indicates the frequency of sequences with that count, while the quartiles within give a summary of the distribution's shape.</li>
+</ul>
+<p>The resulting violin plot offers a comprehensive view of how each state is distributed across the healthy individual sequences, highlighting the variability and density of each state's occurrence. This visual analysis is crucial for understanding the typical EEG microstate patterns in healthy individuals and can serve as a reference when comparing to other groups, such as those with schizophrenia.</p>
+<hr>
+<h4 id="violin-plot-analysis-of-brain-state-distributions-by-subject">Violin Plot Analysis of Brain State Distributions by Subject </h4>
+<p>This section of the report delves into an expansive visual analysis of the distribution of brain states for each subject, categorized by group (Schizophrenia vs. Healthy), using violin plots. This visualization aims to offer a detailed and comparative perspective on how individual subjects' EEG microstate sequences distribute across different brain states, potentially reflecting underlying patterns or deviations associated with each group.</p>
+<a href="images/distributions/expanded_violin.png">
+    <img src="images/distributions/expanded_violin.png" alt="expanded_violin" style="margin-top: 0px; scale: 1.0">
+</a>
+<p>Fig. 5: Violin plots for brain state distributions by subject.</p>
+<h5 id="visualization-strategy">Visualization Strategy </h5>
+<ul>
+<li><strong>Violin Plots</strong>: The use of violin plots provides a rich, detailed view of the distribution of brain states for each subject. These plots combine aspects of box plots and kernel density plots to show the spread and density of data.</li>
+<li><strong>Grouping and Color Coding</strong>: Subjects are grouped by their respective health status (Schizophrenia or Healthy), with the plot hue corresponding to each group for easy differentiation.</li>
+<li><strong>Reference Lines</strong>: Vertical dashed lines are drawn at each brain state marker to guide the eye and enhance readability, providing a clear demarcation between states.</li>
+</ul>
+<h5 id="plot-description-1">Plot Description </h5>
+<ul>
+<li><strong>X-axis (Brain State)</strong>: The x-axis corresponds to the different brain states identified in the EEG sequences, providing a categorical base for the distribution plots.</li>
+<li><strong>Y-axis (Subject)</strong>: The y-axis lists each subject, allowing for individual distribution plots to be aligned with the subject's identifier.</li>
+<li><strong>Violins</strong>: Each violin plot represents the distribution of occurrences of a particular brain state for a given subject, with the width of the plot indicating the frequency of the state's occurrence. The inner "quartile" indicates the median and quartile ranges of the data, giving a sense of the central tendency and spread.</li>
+<li><strong>Enhancements</strong>:
+<ul>
+<li>The background is set to white for a clean, unobtrusive view.</li>
+<li>X and Y axes are clearly labeled with brain states and subject identifiers, respectively.</li>
+</ul>
+</li>
+</ul>
+<h5 id="interpretation">Interpretation </h5>
+<p>By examining the shape, spread, and orientation of the violins across all subjects and states, we can infer individual and group-level patterns in the distribution of brain states. This visualization helps identify unique or common distribution patterns that might correlate with group characteristics, offering insights into the neurological or behavioral dimensions of schizophrenia and healthy controls.</p>
+<p>The same plot in vertical orientation is shown below for a different perspective.</p>
+<a href="images/distributions/expanded_subjects_violin_v.png">
+    <img src="images/distributions/expanded_subjects_violin_v.png" alt="expanded_subjects_violin_v" style="margin-bottom: 15px; scale: 1.2">    
+</a>
+<p>Fig. 6: Violin plots for brain state distributions by subject (vertical orientation).</p>
+<p>Box plot for comparison:</p>
+<a href="images/distributions/expanded_boxplot.png">
+    <img src="images/distributions/expanded_boxplot.png" alt="expanded_boxplot" style="margin-bottom: 35px; margin-top: 35px; scale: 1.2">
+</a>
+<p>Fig. 7: Box plot for brain state distributions by subject.</p>
+<p>This plots shows the same data as the violin plots, but in a different format. The box plot is a standard visualization for showing the distribution of data, with the box representing the quartiles and the whiskers showing the extent of the data. The violin plot is a more detailed version of the box plot, showing the distribution of data as a kernel density plot, with the width of the plot indicating the frequency of the data. The violin plot also shows the quartiles, giving a sense of the central tendency and spread of the data.</p>
+<hr>
+<p>Here are descriptions for the heatmap visualization scripts from your EEG microstate sequence analysis, one for the healthy group and another for the schizophrenia group.</p>
+<hr>
+<h4 id="heatmap-visualization-of-state-occurrences-in-individuals">Heatmap Visualization of State Occurrences in Individuals </h4>
+<p>This section of the report presents a heatmap visualization to represent the frequency of each brain state across all subjects in the both groups. Heatmaps provide an intuitive color-coded representation of the data, making it easier to spot patterns, frequencies, and anomalies in the distribution of states.</p>
+<p><strong>Heatmap Visualization</strong>: The frequency of each state is visualized using a heatmap, providing a clear, color-coded representation of the distribution of states.</p>
+<a href="images/distributions/healthy_heatmap.png">
+    <img src="images/distributions/healthy_heatmap.png" alt="heatmap_healthy" style="margin-left: 0px; scale: 1.0">
+</a>
+<p>Fig. 8: Heatmap for healthy subjects.</p>
+<a href="images/distributions/schizo_heatmap.png">
+    <img src="images/distributions/schizo_heatmap.png" alt="heatmap_schizo" style="margin-left: 0px; scale: 1.0">
+</a>
+<p>Fig. 9: Heatmap for schizophrenia subjects.</p>
+<h5 id="data-transformation-and-structure-2">Data Transformation and Structure </h5>
+<ul>
+<li><strong>Data Grouping</strong>: The EEG sequence data for the healthy group is aggregated by both state and subject using a group-by operation. This allows us to count the occurrences of each state for each subject, forming a matrix where rows correspond to states and columns correspond to subjects.</li>
+<li><strong>Heatmap Generation</strong>: We employ seaborn's heatmap function to transform this matrix into a visual format. The color intensity in the heatmap corresponds to the frequency of each state, providing a clear visual representation of the distribution across subjects.</li>
+</ul>
+<h5 id="visualization-description">Visualization Description </h5>
+<ul>
+<li><strong>Axes</strong>:
+<ul>
+<li>The x-axis represents the subjects, each tick corresponding to a unique individual in the group.</li>
+<li>The y-axis corresponds to the different brain states, listed in order.</li>
+</ul>
+</li>
+<li><strong>Color Scheme</strong>: The 'Oranges' colormap is used to represent frequency intensity, with darker shades indicating higher frequencies.</li>
+<li><strong>Labels</strong>: The subjects and states are labeled along the x and y axes, respectively, with x-axis labels rotated for readability.</li>
+</ul>
+<h5 id="interpretation-1">Interpretation </h5>
+<p>The heatmap allows for an immediate visual assessment of state frequency distribution across subjects in the both groups. Here we can identify common patterns, high-frequency states, or anomalies by examining the color gradients across the matrix.</p>
+<hr>
+<h4 id="structured-data-compilation-and-descriptive-analysis-of-eeg-microstate-sequences">Structured Data Compilation and Descriptive Analysis of EEG Microstate Sequences </h4>
+<p>This section highlights the methodical approach to organizing EEG microstate sequences into a structured data format, facilitating a comprehensive descriptive statistical analysis. By systematically categorizing the sequences into states, groups, and subjects, we establish a robust framework for in-depth analysis and visualization.</p>
+<h5 id="data-organization-methodology">Data Organization Methodology </h5>
+<ul>
+<li><strong>Data Loading</strong>: EEG microstate sequences are loaded, assuming they are structured with identifiable fields for state sequences, group classification (healthy or schizophrenic), and subject identification.</li>
+<li><strong>Data Transformation</strong>: The sequences are iterated through, with each state in each sequence being recorded along with its corresponding group and subject. This process results in a comprehensive list of states, groups, and subjects.</li>
+<li><strong>DataFrame Creation</strong>: Utilizing pandas library for data manipulation, we compile the lists into a DataFrame. This DataFrame serves as an organized, tabular representation of the data, where each row corresponds to a state occurrence, and columns represent the state, group, and subject.</li>
+</ul>
+<h5 id="descriptive-analysis">Descriptive Analysis </h5>
+<ul>
+<li><strong>Grouping and Summary Statistics</strong>: The DataFrame is grouped by state to provide a focused view of each state's distribution across subjects and groups. Summary statistics are then generated for each state, offering insights into count, frequency, and group prevalence.</li>
+<li><strong>Statistical Overview Table</strong>: A table is produced showing key descriptive statistics for each state, including counts, unique values, and frequencies. This table provides a clear, concise summary of the data, allowing for quick reference and comparative analysis.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">State</th>
+<th style="text-align:right">('Group', 'count')</th>
+<th style="text-align:right">('Group', 'unique')</th>
+<th style="text-align:left">('Group', 'top')</th>
+<th style="text-align:right">('Group', 'freq')</th>
+<th style="text-align:right">('Subject', 'count')</th>
+<th style="text-align:right">('Subject', 'unique')</th>
+<th style="text-align:left">('Subject', 'top')</th>
+<th style="text-align:right">('Subject', 'freq')</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">41905</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Healthy</td>
+<td style="text-align:right">27622</td>
+<td style="text-align:right">41905</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 9</td>
+<td style="text-align:right">2734</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">46596</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">24169</td>
+<td style="text-align:right">46596</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 60</td>
+<td style="text-align:right">1195</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">41939</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Healthy</td>
+<td style="text-align:right">23027</td>
+<td style="text-align:right">41939</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 10</td>
+<td style="text-align:right">1670</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:right">37477</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">18752</td>
+<td style="text-align:right">37477</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 63</td>
+<td style="text-align:right">1465</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td style="text-align:right">38151</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">19573</td>
+<td style="text-align:right">38151</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 1</td>
+<td style="text-align:right">997</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td style="text-align:right">49384</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">30133</td>
+<td style="text-align:right">49384</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 7</td>
+<td style="text-align:right">2678</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td style="text-align:right">38670</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">22664</td>
+<td style="text-align:right">38670</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 80</td>
+<td style="text-align:right">1287</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td style="text-align:right">43211</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">24534</td>
+<td style="text-align:right">43211</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 34</td>
+<td style="text-align:right">1657</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td style="text-align:right">31971</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">17565</td>
+<td style="text-align:right">31971</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 21</td>
+<td style="text-align:right">1485</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td style="text-align:right">39383</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">20286</td>
+<td style="text-align:right">39383</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 36</td>
+<td style="text-align:right">1271</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td style="text-align:right">43884</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">25239</td>
+<td style="text-align:right">43884</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 76</td>
+<td style="text-align:right">1519</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td style="text-align:right">43272</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">24617</td>
+<td style="text-align:right">43272</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 33</td>
+<td style="text-align:right">1386</td>
+</tr>
+<tr>
+<td style="text-align:right">13</td>
+<td style="text-align:right">39846</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">21328</td>
+<td style="text-align:right">39846</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 5</td>
+<td style="text-align:right">1337</td>
+</tr>
+<tr>
+<td style="text-align:right">14</td>
+<td style="text-align:right">36546</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">20332</td>
+<td style="text-align:right">36546</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 81</td>
+<td style="text-align:right">829</td>
+</tr>
+<tr>
+<td style="text-align:right">15</td>
+<td style="text-align:right">39205</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">23441</td>
+<td style="text-align:right">39205</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 50</td>
+<td style="text-align:right">1569</td>
+</tr>
+<tr>
+<td style="text-align:right">16</td>
+<td style="text-align:right">33680</td>
+<td style="text-align:right">2</td>
+<td style="text-align:left">Schizo</td>
+<td style="text-align:right">19772</td>
+<td style="text-align:right">33680</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">Subject 45</td>
+<td style="text-align:right">772</td>
+</tr>
+</tbody>
+</table>
+<h5 id="interpretation-2">Interpretation </h5>
+<p>The structured organization of the EEG microstate sequence data into a DataFrame allows for a detailed and nuanced understanding of the distribution of states across subjects and groups. The descriptive statistics offer a preliminary insight into the data's characteristics, such as the prevalence of certain states in one group versus another or the variability of state occurrences across subjects. This foundational analysis sets the stage for more advanced statistical tests and visualizations, providing a basis for further research and discovery.</p>
+<h4 id="conclusion">Conclusion </h4>
+<p>This report provides a detailed exploration of EEG microstate sequence distributions, revealing distinctive patterns and differences between healthy individuals and those with schizophrenia. Employing a range of analytical and plotting techniques, including bar plots, violin plots, and heatmaps, we uncover patterns and differences in the state distributions between the groups. I hope that this report provides a more granular look at the differences between the groups, offering a deeper understanding of the state distributions and their implications for normal and pathological brain functions.</p>
+<hr>
+<h6 id="author-łukasz-furmancracernetgmailcom">Author: <a href="cracer.net@gmail.com">Łukasz Furman</a> </h6>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
