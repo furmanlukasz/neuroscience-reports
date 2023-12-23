@@ -170,10 +170,6 @@ This plots shows the same data as the violin plots, but in a different format. T
 
 ---
 
-Here are descriptions for the heatmap visualization scripts from your EEG microstate sequence analysis, one for the healthy group and another for the schizophrenia group.
-
----
-
 #### Heatmap Visualization of State Occurrences in Individuals
 
 This section of the report presents a heatmap visualization to represent the frequency of each brain state across all subjects in the both groups. Heatmaps provide an intuitive color-coded representation of the data, making it easier to spot patterns, frequencies, and anomalies in the distribution of states.
