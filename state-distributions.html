@@ -23,12 +23,10 @@
     
     
       <div class="crossnote markdown-preview  ">
-      
-<!-- add button to go home (index.html) -->
-<div class="home-btn">
-  <a href="index.html">
-    <img src="images/home.png" alt="home" style="width: 50px; height: 50px;">
-  </a>
+        <div class="home-btn">
+            <a href="index.html">
+              <img src="images/home.png" alt="home" style="width: 50px; height: 50px;">
+            </a>    
 <h3 id="eeg-microstate-sequences-a-visual-exploration-of-state-distributions">EEG Microstate Sequences: A Visual Exploration of State Distributions </h3>
 <h4 id="introduction">Introduction </h4>
 <p>This report delves into the statistical distributions and visualizations of EEG microstate sequences, comparing healthy and schizophrenia subjects. Employing a range of analytical and plotting techniques, including bar plots, violin plots, and heatmaps, we aim to uncover patterns and differences in the state distributions between the groups.</p>
@@ -63,18 +61,44 @@
 </li>
 </ul>
 <hr>
+<h4 id="visualizing-the-frequency-of-eeg-states-in-healthy-individuals-using-sorted-bar-graphs">Visualizing the Frequency of EEG States in Healthy Individuals Using Sorted Bar Graphs </h4>
+<p>This section of the report presents a series of bar graphs, each representing the frequency of EEG states in individual sequences from healthy subjects. By organizing and visualizing the data in this manner, we aim to provide a clear and comparative understanding of the prevalence and distribution of various states within each individual's sequence.</p>
+<p><strong>State Frequency Visualization</strong>: The frequency of each state is visualized using a bar graph, providing a clear, quantitative representation of the distribution of states.</p>
+<a href="images/distributions/healthy_sequences_sorted_by_count.png">
+    <img src="images/distributions/healthy_sequences_sorted_by_count.png" alt="Bars Healthy" style="margin-left: 0px; scale: 1.0">
+</a>
+<p>Fig. 3: State frequency for healthy subjects.</p>
+<a href="images/distributions/schizo_sequences_sorted_by_count.png">
+    <img src="images/distributions/schizo_sequences_sorted_by_count.png" alt="Bars Schizo" style="margin-left: 0px; scale: 1.0">
+</a>
+<p>Fig. 4: State frequency for schizophrenia subjects.</p>
+<h5 id="data-transformation-and-structure-1">Data Transformation and Structure </h5>
+<ul>
+<li><strong>Grid Layout</strong>: The visualizations are arranged in a grid layout, with each subplot corresponding to an individual subject from the both groups. This arrangement allows for easy comparison between subjects.</li>
+<li><strong>Color Mapping</strong>: A color map is generated to visually distinguish between different states, enhancing the interpretability of the graphs.</li>
+<li><strong>Data Preparation and Sorting</strong>:
+<ul>
+<li>For each sequence, the occurrences of each state are counted.</li>
+<li>The counts, along with their corresponding states, are then sorted in descending order to prioritize the most prevalent states in the visualization.</li>
+</ul>
+</li>
+<li><strong>Bar Graph Construction</strong>: A bar graph is created for each subject, with the bars representing the sorted state counts. The colors correspond to the states, providing a visual cue to the state identity and its frequency.</li>
+</ul>
+<h5 id="interpretation">Interpretation </h5>
+<p>These sorted bar graphs provide a detailed and comparative view of the frequency distribution of EEG states for each subject in the both groups. By examining the height and color of the bars, we can infer the prevalence and variety of states within individual sequences. The arrangement and sorting make it easier to identify common patterns or unique characteristics within the healthy population, facilitating further analysis or comparison with other groups such as individuals with schizophrenia.</p>
+<hr>
 <h4 id="violin-plots-for-group-comparison">Violin Plots for Group Comparison </h4>
 <p>In this section, we explore the distribution of microstate counts within the EEG sequences of healthy individuals using violin plots. The aim is to provide a visual representation that captures the distribution and density of each state's occurrences across all subjects in the healthy group. This visualization helps in identifying the commonality and variability of state occurrences within the group.</p>
 <p><strong>Violin Plots for Group Comparison</strong>: Group-wide distributions are explored using violin plots, showcasing the spread and density of state occurrences.</p>
 <a href="images/distributions/healthy_violin.png">
     <img src="images/distributions/healthy_violin.png" alt="Violin Healthy" style="margin-left: 0px; scale: 1.0">
 </a>
-<p>Fig. 3: Violin plots for healthy subjects.</p>
+<p>Fig. 5: Violin plots for healthy subjects.</p>
 <a href="images/distributions/schizo_violin.png">
     <img src="images/distributions/schizo_violin.png" alt="Violin Schizo" style="margin-left: 0px; scale: 1.0">
 </a>
-<p>Fig. 4: Violin plots for schizophrenia subjects.</p>
-<h5 id="data-transformation-and-structure-1">Data Transformation and Structure </h5>
+<p>Fig. 6: Violin plots for schizophrenia subjects.</p>
+<h5 id="data-transformation-and-structure-2">Data Transformation and Structure </h5>
 <p><strong>Data Preparation</strong>: For each sequence in the both groups, we identify the unique states and count their occurrences within the sequence. This results in a distribution of counts for each state across all sequences.</p>
 <p><strong>Violin Plot Construction</strong>:</p>
 <ul>
@@ -94,7 +118,7 @@
 <a href="images/distributions/expanded_violin.png">
     <img src="images/distributions/expanded_violin.png" alt="expanded_violin" style="margin-top: 0px; scale: 1.0">
 </a>
-<p>Fig. 5: Violin plots for brain state distributions by subject.</p>
+<p>Fig. 7: Violin plots for brain state distributions by subject.</p>
 <h5 id="visualization-strategy">Visualization Strategy </h5>
 <ul>
 <li><strong>Violin Plots</strong>: The use of violin plots provides a rich, detailed view of the distribution of brain states for each subject. These plots combine aspects of box plots and kernel density plots to show the spread and density of data.</li>
@@ -113,18 +137,18 @@
 </ul>
 </li>
 </ul>
-<h5 id="interpretation">Interpretation </h5>
+<h5 id="interpretation-1">Interpretation </h5>
 <p>By examining the shape, spread, and orientation of the violins across all subjects and states, we can infer individual and group-level patterns in the distribution of brain states. This visualization helps identify unique or common distribution patterns that might correlate with group characteristics, offering insights into the neurological or behavioral dimensions of schizophrenia and healthy controls.</p>
 <p>The same plot in vertical orientation is shown below for a different perspective.</p>
 <a href="images/distributions/expanded_subjects_violin_v.png">
     <img src="images/distributions/expanded_subjects_violin_v.png" alt="expanded_subjects_violin_v" style="margin-bottom: 15px; scale: 1.2">    
 </a>
-<p>Fig. 6: Violin plots for brain state distributions by subject (vertical orientation).</p>
+<p>Fig. 8: Violin plots for brain state distributions by subject (vertical orientation).</p>
 <p>Box plot for comparison:</p>
 <a href="images/distributions/expanded_boxplot.png">
     <img src="images/distributions/expanded_boxplot.png" alt="expanded_boxplot" style="margin-bottom: 35px; margin-top: 35px; scale: 1.2">
 </a>
-<p>Fig. 7: Box plot for brain state distributions by subject.</p>
+<p>Fig. 9: Box plot for brain state distributions by subject.</p>
 <p>This plots shows the same data as the violin plots, but in a different format. The box plot is a standard visualization for showing the distribution of data, with the box representing the quartiles and the whiskers showing the extent of the data. The violin plot is a more detailed version of the box plot, showing the distribution of data as a kernel density plot, with the width of the plot indicating the frequency of the data. The violin plot also shows the quartiles, giving a sense of the central tendency and spread of the data.</p>
 <hr>
 <p>Here are descriptions for the heatmap visualization scripts from your EEG microstate sequence analysis, one for the healthy group and another for the schizophrenia group.</p>
@@ -135,12 +159,12 @@
 <a href="images/distributions/healthy_heatmap.png">
     <img src="images/distributions/healthy_heatmap.png" alt="heatmap_healthy" style="margin-left: 0px; scale: 1.0">
 </a>
-<p>Fig. 8: Heatmap for healthy subjects.</p>
+<p>Fig. 10: Heatmap for healthy subjects.</p>
 <a href="images/distributions/schizo_heatmap.png">
     <img src="images/distributions/schizo_heatmap.png" alt="heatmap_schizo" style="margin-left: 0px; scale: 1.0">
 </a>
-<p>Fig. 9: Heatmap for schizophrenia subjects.</p>
-<h5 id="data-transformation-and-structure-2">Data Transformation and Structure </h5>
+<p>Fig. 11: Heatmap for schizophrenia subjects.</p>
+<h5 id="data-transformation-and-structure-3">Data Transformation and Structure </h5>
 <ul>
 <li><strong>Data Grouping</strong>: The EEG sequence data for the healthy group is aggregated by both state and subject using a group-by operation. This allows us to count the occurrences of each state for each subject, forming a matrix where rows correspond to states and columns correspond to subjects.</li>
 <li><strong>Heatmap Generation</strong>: We employ seaborn's heatmap function to transform this matrix into a visual format. The color intensity in the heatmap corresponds to the frequency of each state, providing a clear visual representation of the distribution across subjects.</li>
@@ -156,7 +180,7 @@
 <li><strong>Color Scheme</strong>: The 'Oranges' colormap is used to represent frequency intensity, with darker shades indicating higher frequencies.</li>
 <li><strong>Labels</strong>: The subjects and states are labeled along the x and y axes, respectively, with x-axis labels rotated for readability.</li>
 </ul>
-<h5 id="interpretation-1">Interpretation </h5>
+<h5 id="interpretation-2">Interpretation </h5>
 <p>The heatmap allows for an immediate visual assessment of state frequency distribution across subjects in the both groups. Here we can identify common patterns, high-frequency states, or anomalies by examining the color gradients across the matrix.</p>
 <hr>
 <h4 id="structured-data-compilation-and-descriptive-analysis-of-eeg-microstate-sequences">Structured Data Compilation and Descriptive Analysis of EEG Microstate Sequences </h4>
@@ -365,7 +389,7 @@
 </tr>
 </tbody>
 </table>
-<h5 id="interpretation-2">Interpretation </h5>
+<h5 id="interpretation-3">Interpretation </h5>
 <p>The structured organization of the EEG microstate sequence data into a DataFrame allows for a detailed and nuanced understanding of the distribution of states across subjects and groups. The descriptive statistics offer a preliminary insight into the data's characteristics, such as the prevalence of certain states in one group versus another or the variability of state occurrences across subjects. This foundational analysis sets the stage for more advanced statistical tests and visualizations, providing a basis for further research and discovery.</p>
 <h4 id="conclusion">Conclusion </h4>
 <p>This report provides a detailed exploration of EEG microstate sequence distributions, revealing distinctive patterns and differences between healthy individuals and those with schizophrenia. Employing a range of analytical and plotting techniques, including bar plots, violin plots, and heatmaps, we uncover patterns and differences in the state distributions between the groups. I hope that this report provides a more granular look at the differences between the groups, offering a deeper understanding of the state distributions and their implications for normal and pathological brain functions.</p>
