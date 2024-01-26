@@ -1,0 +1,407 @@
+<!DOCTYPE html><html><head>
+      <title>web-AD-spectral</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+        <div class="crossnote markdown-preview  ">
+            <div class="home-btn">
+              <a href="index.html">
+                <img src="images/home.png" alt="home" style="width: 50px; height: 50px;">
+              </a>  
+<h3 id="spectral-analysis-of-high-density-eeg-recordings-in-mild-cognitive-impairment">Spectral Analysis of High-Density EEG Recordings in Mild Cognitive Impairment </h3>
+<h4 id="introduction">Introduction </h4>
+<p>This section of the report presents a spectral analysis of resting-state high-density EEG recordings from participants with Mild Cognitive Impairment (MCI), part of a larger dataset involving Healthy Elders, People with Subjective and Mild Cognitive Impairment, and Alzheimer's Disease. The dataset, provided by Lazarou et al.[1], consists of recordings from various groups, with this analysis focusing exclusively on the MCI group.</p>
+<p>The dataset is not publicly available, but can be requested from the authors.</p>
+<h4 id="participant-selection-and-data-preprocessing">Participant Selection and Data Preprocessing </h4>
+<p>From the total pool of 79 MCI participants, 40 subjects were meticulously chosen based on the quality and properties of their EEG recordings, as outlined in the dataset description by the authors. Each subject's recording was manually inspected, and segments ranging from 1 to 6 (40-second intervals) were selected based on recording quality.</p>
+<h4 id="experimental-design">Experimental Design </h4>
+<p>The authors of the dataset provided a detailed description of the experimental design, that can be summarized as follows:<br>
+Subject were instructed to sit comfortably in a chair. They alternately open and close their eyes at the experimenter's request. Unfortunately, the exact timing of the eye opening and closing was not specified to one template, but rather left to the experimenter's discretion. The experiment lasted (clues from data) for ~9 minutes.</p>
+<h5 id="preprocessing-steps">Preprocessing Steps </h5>
+<ul>
+<li>Independent Component Analysis (ICA) was employed to remove eye blinks and other artifacts.</li>
+<li>Bad channels were identified, marked, and interpolated using the nearest neighbors.</li>
+<li>A bandpass filter of 0.5 - 70 Hz was applied, in line with the dataset authors' pre-filtering.</li>
+</ul>
+<p>These preprocessing steps ensured the extraction of high-quality data segments for further analysis.</p>
+<h4 id="spectral-analysis-methodology">Spectral Analysis Methodology </h4>
+<p>Spectral analysis was conducted to investigate the distribution of power across different frequency bands. The following frequency bands were analyzed: Delta, Theta, Alpha, Sigma, Beta, and Gamma. The analysis included:</p>
+<ul>
+<li>Calculation of relative band powers for each EEG recording.</li>
+<li>Generation of Power Spectral Density (PSD) plots and topographic maps.</li>
+<li>Visualization of bandpower distribution across subjects.</li>
+<li>Signal-to-Noise Ratio (SNR) calculation for each frequency band.</li>
+</ul>
+<h5 id="tools-and-libraries">Tools and Libraries </h5>
+<ul>
+<li>MNE-Python [2] library was extensively used for data processing and visualization.</li>
+<li>mne-icalabel [2] [3] was used for ICA-based artifact removal.</li>
+<li>YASA [4] [5] (Yet Another Spindle Algorithm) was employed for bandpower calculation.</li>
+<li>Matplotlib [6] and Seaborn [7] were used for data visualization.</li>
+<li>Pandas [8] was used for data manipulation.</li>
+</ul>
+<h4 id="results">Results </h4>
+<h5 id="relative-bandpowers-across-subjects">Relative Bandpowers Across Subjects </h5>
+<p>The analysis revealed distinct patterns in the distribution of power across different EEG frequency bands in subjects with MCI.</p>
+<ul>
+<li><strong>Relative Bandpowers</strong>: Stacked barplot for relative bandpowers for each subject - shows the variability in the distribution of power across frequency bands.</li>
+</ul>
+<a href="images/MCI_figures/bandpowers_2nd_iter.png">
+    <img src="images/MCI_figures/bandpowers_2nd_iter.png" alt="RelBandPow">
+</a>
+<p>Fig.1: Relative bandpowers for each subject. The variability in the distribution of power across frequency bands is evident.</p>
+<ul>
+<li><strong>Total Power</strong>: Total power for each subject - shows the variability in the quality of the EEG recordings.</li>
+</ul>
+<a href="images/MCI_figures/totalpower_2nd_iter">
+    <img src="images/MCI_figures/totalpower_2nd_iter.png" alt="TotBandPow">
+</a>
+<p>Fig.2: Total power for each subject.</p>
+<p>This visualization offers insights into the variability and commonality in EEG spectral profiles among MCI subjects.</p>
+<h5 id="signal-to-noise-ratio-calculation-across-eeg-frequency-bands">Signal-to-Noise Ratio Calculation Across EEG Frequency Bands </h5>
+<p>To understand the distribution of power across different EEG frequency bands, we calculated the Signal-to-Noise Ratio (SNR) for each EEG frequency band, wherein the power in all other bands is considered as noise. This method is predicated on the idea that each frequency band can be isolated to understand its individual contribution, relative to the combined activity of all other bands. The procedure involves two primary steps:</p>
+<ol>
+<li>
+<p><strong>Total Power Exclusion for Each Band</strong>: For every frequency band of interest - namely Theta, Alpha, Beta, and Gamma - compute the total power by summing the power of all other bands. This sum is treated as the 'noise' component for the band under consideration.</p>
+</li>
+<li>
+<p><strong>SNR Calculation</strong>: The SNR for each band is then determined by dividing the power in the specific band (signal) by the total power of the other bands (noise), with the result expressed in decibels. This is done for each subject, providing a distinct SNR value for each frequency band. That is, the SNR for the e.g. Theta band is calculated as:</p>
+</li>
+</ol>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mi>N</mi><msub><mi>R</mi><mrow><mi>T</mi><mi>h</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow></msub><mo>=</mo><mn>10</mn><mo>∗</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>10</mn></msub><mo stretchy="false">(</mo><mfrac><mrow><mi>T</mi><mi>h</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow><mrow><mi>A</mi><mi>l</mi><mi>p</mi><mi>h</mi><mi>a</mi><mo>+</mo><mi>S</mi><mi>i</mi><mi>g</mi><mi>m</mi><mi>a</mi><mo>+</mo><mi>B</mi><mi>e</mi><mi>t</mi><mi>a</mi><mo>+</mo><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi></mrow></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">SNR_{Theta} = 10 * log_{10}(\frac{Theta}{Alpha + Sigma + Beta + Gamma})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">SN</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord mathnormal mtight">h</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="mord mathnormal">lp</span><span class="mord mathnormal">ha</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">ma</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">amma</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>To visually present these SNR values, we employ box plots for each frequency band, highlighting the variability and median SNR values across our subject pool:</p>
+<a href="images/MCI_figures/SNR-all.png">
+    <img src="images/MCI_figures/SNR-all.png" alt="SNR">
+</a>
+<p>Fig.3: SNR for each frequency band. Some outliers <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mtext>○</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(○)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">○</span><span class="mclose">)</span></span></span></span> are visible in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>e</mi><mi>l</mi><mi>t</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">De</span><span class="mord mathnormal">lt</span><span class="mord mathnormal">a</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mi>h</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">Theta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span></span></span></span>, and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">Gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">amma</span></span></span></span> bands.</p>
+<p>Through this approach, is aim to provide a comprehensive view of the SNR across different frequency bands in the context of our EEG study. However, it is important to note that this interpretation of SNR, considering the contribution of all other bands as noise relative to a particular band of interest, deviates from traditional neurophysiological interpretations. This methodology is adopted to explore the unique patterns and characteristics of each frequency band in isolation, acknowledging that this might not conform to the conventional definitions of signal and noise in EEG analyses. This distinction is crucial for the correct interpretation of our results and is clearly communicated to avoid any potential misconceptions.</p>
+<hr>
+<h5 id="individual-subject-analysis">Individual Subject Analysis </h5>
+<p>For each selected segment of the EEG recordings, detailed spectral profiles were generated, including:</p>
+<ul>
+<li>
+<p><strong>Relative Bandpowers</strong>: Barplot showing relative bandpowers for each subject and segment. Frequency bands of interest:</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>e</mi><mi>l</mi><mi>t</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">De</span><span class="mord mathnormal">lt</span><span class="mord mathnormal">a</span></span></span></span> (0.5 - 4 Hz)</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mi>h</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">Theta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span></span></span></span> (4 - 8 Hz)</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>l</mi><mi>p</mi><mi>h</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">Alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal">lp</span><span class="mord mathnormal">ha</span></span></span></span> (8 - 12 Hz)</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>i</mi><mi>g</mi><mi>m</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">Sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">ma</span></span></span></span> (12 - 16 Hz)</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>e</mi><mi>t</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">Beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span></span></span></span> (16 - 30 Hz)</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">Gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">amma</span></span></span></span> (30 - 70 Hz)</li>
+</ul>
+</li>
+<li>
+<p><strong>Power Spectral Density</strong>: Power Spectral Density plot for each subject and segment. The x-axis represents the frequency range, while the y-axis represents the power spectral density. The power spectral density was calculated using Welch's method, with a window size of 8.192 seconds. X-axis range is 0.5 - 49 Hz (log scale) - cropped to 49Hz upper range for visualization purposes.</p>
+</li>
+<li>
+<p><strong>Topographic Maps</strong>: Topographic maps showing the distribution of power across the scalp for each subject and segment. The maps were normalized:</p>
+</li>
+</ul>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mi>P</mi><mi>S</mi><mi>D</mi></mrow><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>P</mi><mi>S</mi><msub><mi>D</mi><mi>i</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{PSD}{\sum_{i=1}^{n} PSD_i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.3543em;vertical-align:-0.994em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.3057em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">PS</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">PS</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>S</mi><msub><mi>D</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">PSD_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">PS</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> is the power spectral density for the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>i</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup></mrow><annotation encoding="application/x-tex">i^{th}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathnormal">i</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">h</span></span></span></span></span></span></span></span></span></span></span></span> frequency band. That is, the power spectral density for each frequency band was divided by the sum of the power spectral densities across all frequency bands. Colorbar values represent the normalized power spectral density.</p>
+<p>Each figure captures the unique spectral characteristics of the EEG recording, providing a granular view of the neural activity in MCI. Below 40 figures are presented, one for each subject and segment:</p>
+<h5 id="subject-1">Subject 1 </h5>
+<a href="images/MCI_figures/i105 20150917 1202_epoch_05_2nd_iter.jpg">
+    <img src="images/MCI_figures/i105 20150917 1202_epoch_05_2nd_iter.jpg" alt="Sub1">
+</a>
+<p>Fig.4 ...</p>
+<hr>
+<h5 id="subject-2">Subject 2 </h5>
+<a href="images/MCI_figures/i052 20150709 1121_epoch_02_2nd_iter.jpg">
+    <img src="images/MCI_figures/i052 20150709 1121_epoch_02_2nd_iter.jpg" alt="Sub2">
+</a>
+<p>Fig.5 ...</p>
+<hr>
+<h5 id="subject-3">Subject 3 </h5>
+<a href="images/MCI_figures/ph5_epoch_03_2nd_iter.jpg">
+    <img src="images/MCI_figures/ph5_epoch_03_2nd_iter.jpg" alt="Sub3">
+</a>
+<p>Fig.6 ...</p>
+<hr>
+<h5 id="subject-4">Subject 4 </h5>
+<a href="images/MCI_figures/I102 20150916 1225_epoch_04_2nd_iter.jpg">
+    <img src="images/MCI_figures/I102 20150916 1225_epoch_04_2nd_iter.jpg" alt="Sub4">
+</a>
+<p>Fig.7 ...</p>
+<hr>
+<h5 id="subject-5">Subject 5 </h5>
+<a href="images/MCI_figures/S089 20140513 1051_epoch_03_2nd_iter.jpg">
+    <img src="images/MCI_figures/S089 20140513 1051_epoch_03_2nd_iter.jpg" alt="Sub5">
+</a>
+<p>Fig.8 ...</p>
+<hr>
+<h5 id="subject-6">Subject 6 </h5>
+<a href="images/MCI_figures/i099 20150915 1031_epoch_03_2nd_iter.jpg">
+    <img src="images/MCI_figures/i099 20150915 1031_epoch_03_2nd_iter.jpg" alt="Sub6">
+</a>
+<p>Fig.9 ...</p>
+<hr>
+<h5 id="subject-7">Subject 7 </h5>
+<a href="images/MCI_figures/i118 20151014 1407_epoch_07_2nd_iter.jpg">
+    <img src="images/MCI_figures/i118 20151014 1407_epoch_07_2nd_iter.jpg" alt="Sub7">
+</a>
+<p>Fig.10 ...</p>
+<hr>
+<h5 id="subject-8">Subject 8 </h5>
+<a href="images/MCI_figures/i011 20150220 1538_epoch_04_2nd_iter.jpg">
+    <img src="images/MCI_figures/i011 20150220 1538_epoch_04_2nd_iter.jpg" alt="Sub8">
+</a>
+<p>Fig.11 ...</p>
+<hr>
+<h5 id="subject-9">Subject 9 </h5>
+<a href="images/MCI_figures/i007 20150115 1321_epoch_02_2nd_iter.jpg">
+    <img src="images/MCI_figures/i007 20150115 1321_epoch_02_2nd_iter.jpg" alt="Sub9">
+</a>
+<p>Fig.12 ...</p>
+<hr>
+<h5 id="subject-10">Subject 10 </h5>
+<a href="images/MCI_figures/i110 20150924 1102_epoch_04_2nd_iter.jpg">
+    <img src="images/MCI_figures/i110 20150924 1102_epoch_04_2nd_iter.jpg" alt="Sub10">
+</a>
+<p>Fig.13 ...</p>
+<hr>
+<h5 id="subject-11">Subject 11 </h5>
+<a href="images/MCI_figures/mci5 20140626 0929_epoch_01_2nd_iter.jpg">
+    <img src="images/MCI_figures/mci5 20140626 0929_epoch_01_2nd_iter.jpg" alt="Sub11">
+</a>
+<p>Fig.14 ...</p>
+<hr>
+<h5 id="subject-12">Subject 12 </h5>
+<a href="images/MCI_figures/i082 20150820 1128_epoch_05_2nd_iter.jpg">
+    <img src="images/MCI_figures/i082 20150820 1128_epoch_05_2nd_iter.jpg" alt="Sub12">
+</a>
+<p>Fig.15 ...</p>
+<hr>
+<h5 id="subject-13">Subject 13 </h5>
+<a href="images/MCI_figures/i125 20160614 0910_epoch_02_2nd_iter.jpg">
+    <img src="images/MCI_figures/i125 20160614 0910_epoch_02_2nd_iter.jpg" alt="Sub13">
+</a>
+<p>Fig.16 ...</p>
+<hr>
+<h5 id="subject-14">Subject 14 </h5>
+<a href="images/MCI_figures/I116 20151013 1315_epoch_05_2nd_iter.jpg">
+    <img src="images/MCI_figures/I116 20151013 1315_epoch_05_2nd_iter.jpg" alt="Sub14">
+</a>
+<p>Fig.17 ...</p>
+<hr>
+<h5 id="subject-15">Subject 15 </h5>
+<a href="images/MCI_figures/S067 20140317 1220_epoch_02_2nd_iter.jpg">
+    <img src="images/MCI_figures/S067 20140317 1220_epoch_02_2nd_iter.jpg" alt="Sub15">
+</a>
+<p>Fig.18 ...</p>
+<hr>
+<h5 id="subject-16">Subject 16 </h5>
+<a href="images/MCI_figures/S074 20140326 0906_epoch_07_2nd_iter.jpg">
+    <img src="images/MCI_figures/S074 20140326 0906_epoch_07_2nd_iter.jpg" alt="Sub16">
+</a>
+<p>Fig.19 ...</p>
+<hr>
+<h5 id="subject-17">Subject 17 </h5>
+<a href="images/MCI_figures/i108 20150921 1206_epoch_01_2nd_iter.jpg">
+    <img src="images/MCI_figures/i108 20150921 1206_epoch_01_2nd_iter.jpg" alt="Sub17">
+</a>
+<p>Fig.20 ...</p>
+<hr>
+<h5 id="subject-18">Subject 18 </h5>
+<a href="images/MCI_figures/S070 20140318 1024_epoch_01_2nd_iter.jpg">
+    <img src="images/MCI_figures/S070 20140318 1024_epoch_01_2nd_iter.jpg" alt="Sub18">
+</a>
+<p>Fig.21 ...</p>
+<hr>
+<h5 id="subject-19">Subject 19 </h5>
+<a href="images/MCI_figures/S086 20140506 1035_epoch_02_2nd_iter.jpg">
+    <img src="images/MCI_figures/S086 20140506 1035_epoch_02_2nd_iter.jpg" alt="Sub19">
+</a>
+<p>Fig.22 ...</p>
+<hr>
+<h5 id="subject-20">Subject 20 </h5>
+<a href="images/MCI_figures/i019 20150615 0945_epoch_02_2nd_iter.jpg">
+    <img src="images/MCI_figures/i019 20150615 0945_epoch_02_2nd_iter.jpg" alt="Sub20">
+</a>
+<p>Fig.23 ...</p>
+<hr>
+<h5 id="subject-21">Subject 21 </h5>
+<a href="images/MCI_figures/i049 20150708 0945_epoch_04_2nd_iter.jpg">
+    <img src="images/MCI_figures/i049 20150708 0945_epoch_04_2nd_iter.jpg" alt="Sub21">
+</a>
+<p>Fig.24 ...</p>
+<hr>
+<h5 id="subject-22">Subject 22 </h5>
+<a href="images/MCI_figures/i041 20150702 1417_epoch_08_2nd_iter.jpg">
+    <img src="images/MCI_figures/i041 20150702 1417_epoch_08_2nd_iter.jpg" alt="Sub22">
+</a>
+<p>Fig.25 ...</p>
+<hr>
+<h5 id="subject-23">Subject 23 </h5>
+<a href="images/MCI_figures/s034 20140203 1404_epoch_04_2nd_iter.jpg">
+    <img src="images/MCI_figures/s034 20140203 1404_epoch_04_2nd_iter.jpg" alt="Sub23">
+</a>
+<p>Fig.26 ...</p>
+<hr>
+<h5 id="subject-24">Subject 24 </h5>
+<a href="images/MCI_figures/i100 20150915 1150_epoch_02_2nd_iter.jpg">
+    <img src="images/MCI_figures/i100 20150915 1150_epoch_02_2nd_iter.jpg" alt="Sub24">
+</a>
+<p>Fig.27 ...</p>
+<hr>
+<h5 id="subject-25">Subject 25 </h5>
+<a href="images/MCI_figures/i111 20150930 1119_epoch_03_2nd_iter.jpg">
+    <img src="images/MCI_figures/i111 20150930 1119_epoch_03_2nd_iter.jpg" alt="Sub25">
+</a>
+<p>Fig.28 ...</p>
+<hr>
+<h5 id="subject-26">Subject 26 </h5>
+<a href="images/MCI_figures/i074 20150724 1346_epoch_01_2nd_iter.jpg">
+    <img src="images/MCI_figures/i074 20150724 1346_epoch_01_2nd_iter.jpg" alt="Sub26">
+</a>
+<p>Fig.29 ...</p>
+<hr>
+<h5 id="subject-27">Subject 27 </h5>
+<a href="images/MCI_figures/S052 20140226 1047_epoch_06_2nd_iter.jpg">
+    <img src="images/MCI_figures/S052 20140226 1047_epoch_06_2nd_iter.jpg" alt="Sub27">
+</a>
+<p>Fig.30 ...</p>
+<hr>
+<h5 id="subject-28">Subject 28 </h5>
+<a href="images/MCI_figures/S036 20140205 1138_epoch_09_2nd_iter.jpg">
+    <img src="images/MCI_figures/S036 20140205 1138_epoch_09_2nd_iter.jpg" alt="Sub28">
+</a>
+<p>Fig.31 ...</p>
+<hr>
+<h5 id="subject-29">Subject 29 </h5>
+<a href="images/MCI_figures/i013 20150401 0959_epoch_03_2nd_iter.jpg">
+    <img src="images/MCI_figures/i013 20150401 0959_epoch_03_2nd_iter.jpg" alt="Sub29">
+</a>
+<p>Fig.32 ...</p>
+<hr>
+<h5 id="subject-30">Subject 30 </h5>
+<a href="images/MCI_figures/i059 20150717 0946_epoch_03_2nd_iter.jpg">
+    <img src="images/MCI_figures/i059 20150717 0946_epoch_03_2nd_iter.jpg" alt="Sub30">
+</a>
+<p>Fig.33 ...</p>
+<hr>
+<h5 id="subject-31">Subject 31 </h5>
+<a href="images/MCI_figures/S071 20140320 0919_epoch_05_2nd_iter.jpg">
+    <img src="images/MCI_figures/S071 20140320 0919_epoch_05_2nd_iter.jpg" alt="Sub31">
+</a>
+<p>Fig.34 ...</p>
+<hr>
+<h5 id="subject-32">Subject 32 </h5>
+<a href="images/MCI_figures/i009 20150211 1150_epoch_06_2nd_iter.jpg">
+    <img src="images/MCI_figures/i009 20150211 1150_epoch_06_2nd_iter.jpg" alt="Sub32">
+</a>
+<p>Fig.35 ...</p>
+<hr>
+<h5 id="subject-33">Subject 33 </h5>
+<a href="images/MCI_figures/i036 20150701 1019_epoch_05_2nd_iter.jpg">
+    <img src="images/MCI_figures/i036 20150701 1019_epoch_05_2nd_iter.jpg" alt="Sub33">
+</a>
+<p>Fig.36 ...</p>
+<hr>
+<h5 id="subject-34">Subject 34 </h5>
+<a href="images/MCI_figures/ph2 20140527 1015_epoch_02_2nd_iter.jpg">
+    <img src="images/MCI_figures/ph2 20140527 1015_epoch_02_2nd_iter.jpg" alt="Sub34">
+</a>
+<p>Fig.37 ...</p>
+<hr>
+<h5 id="subject-35">Subject 35 </h5>
+<a href="images/MCI_figures/i081 20150820 1018_epoch_03_2nd_iter.jpg">
+    <img src="images/MCI_figures/i081 20150820 1018_epoch_03_2nd_iter.jpg" alt="Sub35">
+</a>
+<p>Fig.38 ...</p>
+<hr>
+<h5 id="subject-36">Subject 36 </h5>
+<a href="images/MCI_figures/i085 20150824 1011_epoch_01_2nd_iter.jpg">
+    <img src="images/MCI_figures/i085 20150824 1011_epoch_01_2nd_iter.jpg" alt="Sub36">
+</a>
+<p>Fig.39 ...</p>
+<hr>
+<h5 id="subject-37">Subject 37 </h5>
+<a href="images/MCI_figures/i106 20150917 1346_epoch_02_2nd_iter.jpg">
+    <img src="images/MCI_figures/i106 20150917 1346_epoch_02_2nd_iter.jpg" alt="Sub37">
+</a>
+<p>Fig.40 ...</p>
+<hr>
+<h5 id="subject-38">Subject 38 </h5>
+<a href="images/MCI_figures/i055 20150713 1006_epoch_05_2nd_iter.jpg">
+    <img src="images/MCI_figures/i055 20150713 1006_epoch_05_2nd_iter.jpg" alt="Sub38">
+</a>
+<p>Fig.41 ...</p>
+<hr>
+<h5 id="subject-39">Subject 39 </h5>
+<a href="images/MCI_figures/i115 20151013 1119_epoch_04_2nd_iter.jpg">
+    <img src="images/MCI_figures/i115 20151013 1119_epoch_04_2nd_iter.jpg" alt="Sub39">
+</a>
+<p>Fig.42 ...</p>
+<hr>
+<h5 id="subject-40">Subject 40 </h5>
+<a href="images/MCI_figures/I079 20150819 1134_epoch_01_2nd_iter.jpg">
+    <img src="images/MCI_figures/I079 20150819 1134_epoch_01_2nd_iter.jpg" alt="Sub40">
+</a>
+<p>Fig.43 ...</p>
+<hr>
+<h4 id="discussion">Discussion </h4>
+<p>The spectral analysis of EEG recordings in subjects with Mild Cognitive Impairment (MCI) yields significant insights into the neurophysiological changes associated with cognitive deficits. The observed variability in frequency band powers among subjects may indicate underlying neuropathological alterations typical of MCI. Differences in Total Power (TP) across subjects could stem from variances in EEG recording quality and the duration of the recordings. Analysis at the individual level unveiled distinctive spectral patterns; some subjects exhibited pronounced Alpha peaks in the occipital region, while others displayed dominant Alpha activity in the frontal region.</p>
+<p>This foundational analysis paves the way for subsequent studies to correlate these patterns with clinical symptoms and the progression of Alzheimer's Disease.</p>
+<hr>
+<h4 id="conclusion">Conclusion </h4>
+<p>This report presents a thorough spectral analysis of EEG recordings from individuals with Mild Cognitive Impairment. The study primarily serves as a framework for future analyses within the dataset.</p>
+<p>To acquire 40 seconds of high-quality hdEEG, several preprocessing steps were undertaken:</p>
+<ul>
+<li>Initially, all subjects were vetted according to the dataset description.</li>
+<li>Appropriate subjects underwent a second review, during which bad channels were identified.</li>
+<li>These bad channels were then interpolated.</li>
+<li>Subsequently, ICA was employed to mitigate eye blinks and other artifacts.</li>
+<li>A bandpass filter ranging from 0.5 to 70 Hz was applied.</li>
+<li>Segments of 40 seconds of high-quality hdEEG were meticulously selected and manually inspected.</li>
+<li>Segments that met the quality criteria were used for further analysis, while the rest underwent reprocessing. (This step was iteratively applied to some subjects.)</li>
+</ul>
+<p>The meticulousness of this process is undeniable. However, the caliber of the data is paramount for analysis, justifying the effort expended. While one might consider automating these tasks, and indeed, certain standard quantitative analyses might lend themselves to automation, spectral analysis poses unique challenges. Artifacts such as eye blinks and muscle movements can closely mimic brain activity in lower frequency bands, and gamma activity might be confounded with artifacts from electrical power lines or muscle movements. While some steps can be automated, the final judgment often relies on manual inspection aided by visual data evaluation.</p>
+<p>Certain libraries are available that facilitate the automatic selection of quality data; however, they are not infallible and are most often utilized for Event-Related Potentials (ERP) analysis. In ERP studies, epochs (consistent segments, typically short, e.g., 1-3 seconds) are analyzed, simplifying the task of selecting high-quality data. With numerous repetitions (trials) of the same stimulus event, it is common practice to exclude subpar epochs from further analysis rather than correcting them.</p>
+<p>Thus, the selection of high-quality data for analysis is crucial, underscoring the importance of manual data inspection.</p>
+<hr>
+<h4 id="references">References </h4>
+<ol>
+<li>Ioulietta Lazarou, Kostas Georgiadis, Spiros Nikolopoulos, Vangelis Oikonomoui Ioannis Kompatsiaris, „Resting-State High-Density EEG using EGI GES 300 with 256 Channels of Healthy Elders, People with Subjective and Mild Cognitive Impairment and Alzheimer's Disease”, Brain Science MDPI, t. 10, nr 6. Zenodo, s. 392, grudz. 23, 2020. doi: 10.5281/zenodo.4316608.</li>
+<li>Alexandre Gramfort, Martin Luessi, Eric Larson, Denis A. Engemann, Daniel Strohmeier, Christian Brodbeck, Roman Goj, Mainak Jas, Teon Brooks, Lauri Parkkonen, and Matti S. Hämäläinen. MEG and EEG data analysis with MNE-Python. Frontiers in Neuroscience, 7(267):1–13, 2013. doi:10.3389/fnins.2013.00267.</li>
+<li><a href="https://mne.tools/mne-icalabel/stable/index.html#">https://mne.tools/mne-icalabel/stable/index.html#</a></li>
+<li>Vallat, Raphael, and Matthew P. Walker. "An open-source, high-performance tool for automated sleep staging." Elife 10 (2021). doi: <a href="https://doi.org/10.7554/eLife.70092">https://doi.org/10.7554/eLife.70092</a></li>
+<li><a href="https://github.com/raphaelvallat/yasa">https://github.com/raphaelvallat/yasa</a></li>
+<li>Thomas A Caswell, „matplotlib/matplotlib: REL: v3.7.4”. Zenodo, lis. 18, 2023. doi: 10.5281/zenodo.10152802.</li>
+<li>Waskom, M. L., (2021). seaborn: statistical data visualization. Journal of Open Source Software, 6(60), 3021, <a href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>.</li>
+<li>The pandas development team, „pandas-dev/pandas: Pandas”. Zenodo, sty. 20, 2024. doi: 10.5281/zenodo.10537285.</li>
+</ol>
+<hr>
+<h6 id="author-łukasz-furmancracernetgmailcom">Author: <a href="cracer.net@gmail.com">Łukasz Furman</a> </h6>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
