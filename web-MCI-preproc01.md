@@ -1,16 +1,18 @@
-### Spectral Analysis of High-Density EEG Recordings in Mild Cognitive Impairment
+### Preprocessing of High-Density EEG Recordings in Mild Cognitive Impairment 
 
 #### Introduction
-This section of the report presents a spectral analysis of resting-state high-density EEG recordings from participants with Mild Cognitive Impairment (MCI), part of a larger dataset involving Healthy Elders, People with Subjective and Mild Cognitive Impairment, and Alzheimer's Disease. The dataset, provided by Lazarou et al.[1], consists of recordings from various groups, with this analysis focusing exclusively on the MCI group.
+This report presents a spectral analysis of resting-state high-density EEG recordings from participants with Mild Cognitive Impairment (MCI), part of a larger dataset involving Healthy Elders, People with Subjective and Mild Cognitive Impairment, and Alzheimer's Disease. The dataset, provided by Lazarou et al.[1], consists of recordings from various groups, with this analysis focusing exclusively on the MCI group.
 
 The dataset is not publicly available, but can be requested from the authors. 
 
 #### Participant Selection and Data Preprocessing
+The dataset came with two types of files, raw data and preprocessed by authors. This report focues on the preprocessed by authors data, for report of insights from raw data, see [here](web-MCI-preproc02.md).
+
 From the total pool of 79 MCI participants, 40 subjects were meticulously chosen based on the quality and properties of their EEG recordings, as outlined in the dataset description by the authors. Each subject's recording was manually inspected, and segments ranging from 1 to 6 (40-second intervals) were selected based on recording quality.
 
 #### Experimental Design
 The authors of the dataset provided a detailed description of the experimental design, that can be summarized as follows:
-Subject were instructed to sit comfortably in a chair. They alternately open and close their eyes at the experimenter's request. Unfortunately, the exact timing of the eye opening and closing was not specified to one template, but rather left to the experimenter's discretion. The experiment lasted (clues from data) for ~9 minutes. 
+Subject were instructed to sit comfortably in a chair. They alternately open and close their eyes at the experimenter's request. The exact timing of the eye opening and closing was not specified to one template, but rather left to the experimenter's discretion. The experiment lasted for ~9 minutes. 
 
 <!-- The detailed description can be downloaded [here](https://zenodo.org/record/4316608/files/EEG%20Dataset%20Description.pdf?download=1). -->
 
@@ -28,7 +30,6 @@ Spectral analysis was conducted to investigate the distribution of power across 
 - Calculation of relative band powers for each EEG recording.
 - Generation of Power Spectral Density (PSD) plots and topographic maps.
 - Visualization of bandpower distribution across subjects.
-- Signal-to-Noise Ratio (SNR) calculation for each frequency band.
 
 ##### Tools and Libraries
 - MNE-Python [2] library was extensively used for data processing and visualization.
@@ -69,31 +70,6 @@ Fig.1: Relative bandpowers for each subject. The variability in the distribution
 Fig.2: Total power for each subject. 
 
 This visualization offers insights into the variability and commonality in EEG spectral profiles among MCI subjects.
-
-
-
-##### Signal-to-Noise Ratio Calculation Across EEG Frequency Bands
-
-To understand the distribution of power across different EEG frequency bands, we calculated the Signal-to-Noise Ratio (SNR) for each EEG frequency band, wherein the power in all other bands is considered as noise. This method is predicated on the idea that each frequency band can be isolated to understand its individual contribution, relative to the combined activity of all other bands. The procedure involves two primary steps:
-
-1. **Total Power Exclusion for Each Band**: For every frequency band of interest - namely Theta, Alpha, Beta, and Gamma - compute the total power by summing the power of all other bands. This sum is treated as the 'noise' component for the band under consideration.
-
-2. **SNR Calculation**: The SNR for each band is then determined by dividing the power in the specific band (signal) by the total power of the other bands (noise), with the result expressed in decibels. This is done for each subject, providing a distinct SNR value for each frequency band. That is, the SNR for the e.g. Theta band is calculated as:
-
-$$
-SNR_{Theta} = 10 * log_{10}(\frac{Theta}{Alpha + Sigma + Beta + Gamma})
-$$
-
-
-To visually present these SNR values, we employ box plots for each frequency band, highlighting the variability and median SNR values across our subject pool:
-
-<a href="images/MCI_figures/SNR-all.png">
-    <img src="images/MCI_figures/SNR-all.png" alt="SNR" >
-</a>
-
-Fig.3: SNR for each frequency band. Some outliers $(○)$ are visible in $Delta$, $Theta$, and $Gamma$ bands. 
-
-Through this approach, is aim to provide a comprehensive view of the SNR across different frequency bands in the context of our EEG study. However, it is important to note that this interpretation of SNR, considering the contribution of all other bands as noise relative to a particular band of interest, deviates from traditional neurophysiological interpretations. This methodology is adopted to explore the unique patterns and characteristics of each frequency band in isolation, acknowledging that this might not conform to the conventional definitions of signal and noise in EEG analyses. This distinction is crucial for the correct interpretation of our results and is clearly communicated to avoid any potential misconceptions.
 
 ---
 
@@ -524,27 +500,23 @@ Fig.43 ...
 #### Discussion
 The spectral analysis of EEG recordings in subjects with Mild Cognitive Impairment (MCI) yields significant insights into the neurophysiological changes associated with cognitive deficits. The observed variability in frequency band powers among subjects may indicate underlying neuropathological alterations typical of MCI. Differences in Total Power (TP) across subjects could stem from variances in EEG recording quality and the duration of the recordings. Analysis at the individual level unveiled distinctive spectral patterns; some subjects exhibited pronounced Alpha peaks in the occipital region, while others displayed dominant Alpha activity in the frontal region.
 
-This foundational analysis paves the way for subsequent studies to correlate these patterns with clinical symptoms and the progression of Alzheimer's Disease.
-
 ---
 
 #### Conclusion
-This report presents a thorough spectral analysis of EEG recordings from individuals with Mild Cognitive Impairment. The study primarily serves as a framework for future analyses within the dataset.
+This report presents a thorough spectral analysis of EEG recordings from individuals with Mild Cognitive Impairment.
 
 To acquire 40 seconds of high-quality hdEEG, several preprocessing steps were undertaken:
 - Initially, all subjects were vetted according to the dataset description.
 - Appropriate subjects underwent a second review, during which bad channels were identified.
 - These bad channels were then interpolated.
-- Subsequently, ICA was employed to mitigate eye blinks and other artifacts.
+- Subsequently, ICA (Infomax ICA [2] [3]) was employed to mitigate eye blinks and other artifacts.
 - A bandpass filter ranging from 0.5 to 70 Hz was applied.
 - Segments of 40 seconds of high-quality hdEEG were meticulously selected and manually inspected.
 - Segments that met the quality criteria were used for further analysis, while the rest underwent reprocessing. (This step was iteratively applied to some subjects.)
 
-The meticulousness of this process is undeniable. However, the caliber of the data is paramount for analysis, justifying the effort expended. While one might consider automating these tasks, and indeed, certain standard quantitative analyses might lend themselves to automation, spectral analysis poses unique challenges. Artifacts such as eye blinks and muscle movements can closely mimic brain activity in lower frequency bands, and gamma activity might be confounded with artifacts from electrical power lines or muscle movements. While some steps can be automated, the final judgment often relies on manual inspection aided by visual data evaluation.
+The meticulousness of this process is undeniable. 
 
-Certain libraries are available that facilitate the automatic selection of quality data; however, they are not infallible and are most often utilized for Event-Related Potentials (ERP) analysis. In ERP studies, epochs (consistent segments, typically short, e.g., 1-3 seconds) are analyzed, simplifying the task of selecting high-quality data. With numerous repetitions (trials) of the same stimulus event, it is common practice to exclude subpar epochs from further analysis rather than correcting them.
-
-Thus, the selection of high-quality data for analysis is crucial, underscoring the importance of manual data inspection.
+Thus, the selection of high-quality data for analysis is crucial, underscoring the importance of manual data inspection. How ever proposed filtered EED data files and its spectral profiles are far from being perfect. Some recording indicated overshot of the filter, some of them are not properly filtered, other still contain artifacts but are hard to detect by InforMax ICA, due to fact that data was preprocessed by the authors.
 
 ---
 #### References
