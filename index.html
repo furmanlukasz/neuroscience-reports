@@ -27,16 +27,17 @@
 			<div id="wrapper" class="fade-in">
 
 				<!-- Intro -->
+				
 				<div id="intro">
-
-					<div id="renderMain"></div>
 						<blockquote id="daily-proverb" > </blockquote><!-- Proverb will be displayed here -->
 						<!-- <h1>Datalab108<br /></h1> -->
-						<p>Multidisciplinary Neuroscience</p>
+						<!-- <p>Multidisciplinary Neuroscience</p> -->
+						<div id="renderMain"></div>
 						<ul class="actions">
 							<li><a href="#nav" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 						</ul>
 					</div>
+
 
 				<!-- Header -->
 					<!-- <header id="header">
@@ -286,7 +287,7 @@
 
 			// auto-rotation 
 			controls.autoRotate = false;
-			controls.autoRotateSpeed = 0.5;
+			controls.autoRotateSpeed = 0.05;
 
 			// Directional light
 			const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -301,6 +302,8 @@
 			directionalLight.shadow.camera.top = 200; // Shadow camera top boundary
 			directionalLight.shadow.camera.bottom = -200; // Shadow camera bottom boundary
 			scene.add(directionalLight);
+			scene.fog = new THREE.FogExp2(0xCBAC88, 0.0025);
+
 
 			// Set the shadow bias to reduce self-shadowing
 			// directionalLight.shadow.bias = -0.001;
@@ -329,7 +332,7 @@
 
 			// Rotate the floor to lie flat
 			floorMesh.rotation.x = -Math.PI / 2;
-			floorMesh.position.y = -100; // Adjust the position so it's below the brain
+			floorMesh.position.y = -300; // Adjust the position so it's below the brain
 
 			// Enable shadow casting for the floor
 			floorMesh.receiveShadow = true;
@@ -337,6 +340,24 @@
 
 			// Add the floor to the scene
 			scene.add(floorMesh);
+
+			// Create a wall behind the brain
+			const wallGeometry = new THREE.PlaneGeometry(1000, 1000);
+			const wallMaterial = new THREE.MeshStandardMaterial({ color: 0xFFF4EC, metalness: .2, roughness: 1.9, opacity: .25, transparent: true })
+			// const wallMaterial = new THREE.MeshPhongMaterial({ color: 0x424B54 });
+			const wallMesh = new THREE.Mesh(wallGeometry, wallMaterial);
+
+			// Rotate the wall to lie flat
+			// wallMesh.rotation.x = -Math.PI / 2;
+			// wallMesh.position.y = 0; // Adjust the position so it's below the brain
+			wallMesh.position.z = -50; // Adjust the position so it's behind the brain
+
+			// Enable shadow casting for the wall
+			wallMesh.receiveShadow = true;
+			wallMesh.castShadow = false;
+
+			// Add the wall to the scene
+			scene.add(wallMesh);
 
 
 
@@ -623,9 +644,12 @@
 				
 				// brainGroup.rotation.x = -(Math.PI / 2);
 				//  minus 15 degrees on x axis
-				brainGroup.rotation.x = (Math.PI / 12);
+				// brainGroup.rotation.x = (Math.PI / 12);
 				// move up brainGroup
-				brainGroup.position.y = 70;
+				brainGroup.position.y = -(Math.PI / 2);
+
+				//  Rotate the brain group
+				brainGroup.rotation.z += 0.001;
 
 				adjustNodeSizes();
 
@@ -641,6 +665,9 @@
 				loadCSVData();
 				
 				initializeNodePhases();
+				brainGroup.scale.set(2, 2, 2);
+				brainGroup.position.set(0, 0, -10);
+				// brainGroup.position.y = 500;
 				animate();
 			});
 			
@@ -649,10 +676,23 @@
 			// 	if (child instanceof THREE.Mesh) {
 			// 		// child.receiveShadow = true;
 			// 		child.castShadow = true;
+
+			// 		// scale up the brain
+			// 		child.scale.set(3, 3, 3);
 			// 	}
 			// });
 
-			camera.position.z = 150;
+			// Lerp brainGroup position
+			
+
+			function lerp(a, b, t) {
+            return (1 - t) * a + t * b;
+     		}
+
+			camera.position.z = 300;
+			camera.position.y = -0;
+			// camera.rotation.x = (Math.PI / 2);
+			// camera.lookAt(0, 0, 0);
 
 			// Define variables to track mouse position
 			let mouseX = 0;
@@ -669,12 +709,16 @@
 				// camera.position.y = mouseY * 50;
 
 				// rotate abrain from -30 to 30 degrees based on mouse position x
-				// brainGroup.rotation.z = (mouseX * Math.PI / 6);
+				let rotationX = mouseX * Math.PI / 6;
+				brainGroup.rotation.z = lerp(brainGroup.rotation.z, rotationX, 0.025);
+
+
 				// brainGroup.rotation.x = -(mouseY * Math.PI / 6);
-				brainGroup.rotation.y = (mouseX * Math.PI / 6);
+				// brainGroup.rotation.y = (mouseX * Math.PI / 6);
 
 				// Update camera lookAt position to center
-				camera.lookAt(0, 0, 0);
+
+				// camera.lookAt(0, 0, 0);
 			}
 
 			// Add event listener for mousemove event
