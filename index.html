@@ -258,21 +258,35 @@
 			import * as THREE from 'three';
 			import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+			import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+			import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+			import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+			// import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+			// import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+			// import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+
+
 
 			let W = window,
 				D = document;
+			let effect;
 
 			const scene = new THREE.Scene();
-			const camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
-			const renderer = new THREE.WebGLRenderer({ alpha: true });
-			// renderer.setClearAlpha(0);
+			const camera = new THREE.PerspectiveCamera(110, window.innerWidth / window.innerHeight, 0.1, 1000);
+			// const renderer = new THREE.WebGLRenderer({ alpha: true });
+			// renderer.setPixelRatio( window.devicePixelRatio )
 
-			renderer.setSize(window.innerWidth, window.innerHeight);
+			const renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+			renderer.setPixelRatio( window.devicePixelRatio );
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.toneMapping = THREE.ReinhardToneMapping;
+
 			renderer.shadowMap.enabled = true;
 			renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Soft shadows
 
 			// document.body.appendChild(renderer.domElement);
 			W.document.getElementById("renderMain").appendChild(renderer.domElement);
+
 
 			const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -302,14 +316,14 @@
 			directionalLight.shadow.camera.top = 200; // Shadow camera top boundary
 			directionalLight.shadow.camera.bottom = -200; // Shadow camera bottom boundary
 			scene.add(directionalLight);
-			scene.fog = new THREE.FogExp2(0xCBAC88, 0.0025);
+			scene.fog = new THREE.FogExp2(0xCBAC88, 0.0015);
 
 
 			// Set the shadow bias to reduce self-shadowing
 			// directionalLight.shadow.bias = -0.001;
 
 			// Hemisphere light
-			const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.5);
+			const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.6);
 			scene.add(hemisphereLight);
 
 			const brainColor = 0xE2B4BD;
@@ -326,7 +340,7 @@
 
 			// Create a floor
 			const floorGeometry = new THREE.PlaneGeometry(1000, 1000);
-			const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xFFF4EC, metalness: .2, roughness: 1.9, opacity: .25, transparent: true })
+			const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xFFF4EC, metalness: .7, roughness: 1.9, opacity: .25, transparent: true })
 			// const floorMaterial = new THREE.MeshPhongMaterial({ color: 0x424B54 });
 			const floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
 
@@ -343,7 +357,7 @@
 
 			// Create a wall behind the brain
 			const wallGeometry = new THREE.PlaneGeometry(1000, 1000);
-			const wallMaterial = new THREE.MeshStandardMaterial({ color: 0xFFF4EC, metalness: .2, roughness: 1.9, opacity: .25, transparent: true })
+			const wallMaterial = new THREE.MeshStandardMaterial({ color: 0xFFF4EC, metalness: .7, roughness: 1.9, opacity: .25, transparent: true })
 			// const wallMaterial = new THREE.MeshPhongMaterial({ color: 0x424B54 });
 			const wallMesh = new THREE.Mesh(wallGeometry, wallMaterial);
 
@@ -386,6 +400,25 @@
 				cascadeDelay: 900 
 			};
 			
+
+			var params = {
+				exposure: 1.6,
+				bloomStrength: 1.2,
+				bloomThreshold: 0.23,
+				bloomRadius: 1.2
+			};
+
+			var renderScene = new RenderPass( scene, camera );
+
+			var bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), .5, 0.4, 0.85 );
+			bloomPass.threshold = params.bloomThreshold;
+			bloomPass.strength = params.bloomStrength;
+			bloomPass.radius = params.bloomRadius;
+
+			var composer = new EffectComposer( renderer );
+			composer.addPass( renderScene );
+			composer.addPass( bloomPass )
+
 			// Function to update Lorenz attractor parameters
 			function updateParameters() {
 				// Update Lorenz attractor parameters
@@ -412,6 +445,10 @@
 
 			parameters.cascadeDelay = value;
 			});
+
+
+
+
 
 			function loadAdditionalOBJ(filePath, color = 0x00ff00) {
 				const loader = new OBJLoader();
@@ -646,16 +683,20 @@
 				//  minus 15 degrees on x axis
 				// brainGroup.rotation.x = (Math.PI / 12);
 				// move up brainGroup
+				
 				brainGroup.position.y = -(Math.PI / 2);
 
 				//  Rotate the brain group
-				brainGroup.rotation.z += 0.001;
-
+				// brainGroup.rotation.z += 0.001;
 				adjustNodeSizes();
 
 				controls.update();
-				renderer.render(scene, camera);
+				composer.render(scene, camera );
+				// effect.render( scene, camera );
+				// effect_cb.render( scene, camera );
+				// renderer.render(scene, camera);
 			}
+
 
 
 			loadOBJAndCreateNodes().then(() => {
@@ -667,32 +708,21 @@
 				initializeNodePhases();
 				brainGroup.scale.set(2, 2, 2);
 				brainGroup.position.set(0, 0, -10);
+				
 				// brainGroup.position.y = 500;
 				animate();
 			});
 			
-			// Set receiveShadow to true for objects
-			// brainGroup.traverse((child) => {
-			// 	if (child instanceof THREE.Mesh) {
-			// 		// child.receiveShadow = true;
-			// 		child.castShadow = true;
 
-			// 		// scale up the brain
-			// 		child.scale.set(3, 3, 3);
-			// 	}
-			// });
-
-			// Lerp brainGroup position
-			
 
 			function lerp(a, b, t) {
             return (1 - t) * a + t * b;
      		}
 
-			camera.position.z = 300;
-			camera.position.y = -0;
-			// camera.rotation.x = (Math.PI / 2);
-			// camera.lookAt(0, 0, 0);
+			camera.position.z = 250;
+			camera.position.y = 20;
+
+
 
 			// Define variables to track mouse position
 			let mouseX = 0;
@@ -709,8 +739,8 @@
 				// camera.position.y = mouseY * 50;
 
 				// rotate abrain from -30 to 30 degrees based on mouse position x
-				let rotationX = mouseX * Math.PI / 6;
-				brainGroup.rotation.z = lerp(brainGroup.rotation.z, rotationX, 0.025);
+				let rotationX = mouseX * Math.PI ;
+				brainGroup.rotation.y = lerp(brainGroup.rotation.z, rotationX, 0.04);
 
 
 				// brainGroup.rotation.x = -(mouseY * Math.PI / 6);
