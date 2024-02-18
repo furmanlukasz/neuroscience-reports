@@ -30,9 +30,15 @@
 				
 				<div id="intro">
 						<blockquote id="daily-proverb" > </blockquote><!-- Proverb will be displayed here -->
+						
 						<!-- <h1>Datalab108<br /></h1> -->
-						<!-- <p>Multidisciplinary Neuroscience</p> -->
+						<!-- add spacer -->
+						
 						<div id="renderMain"></div>
+						<div style="height: 100px;"></div>
+						<p>Multidisciplinary Neuroscientist </p> 
+						<p>specializing in Brain Signal Analysis & Neural Engineering,</p> 
+						<p>focuses on understanding the brain's rhythms.</p>
 						<ul class="actions">
 							<li><a href="#nav" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 						</ul>
@@ -700,7 +706,7 @@
 
 
 			loadOBJAndCreateNodes().then(() => {
-				return loadAdditionalOBJ('brain_lh.obj', brainColor);
+				return loadAdditionalOBJ('brain_lh_low.obj', brainColor);
 			}).then(() => {
 
 				loadCSVData();
