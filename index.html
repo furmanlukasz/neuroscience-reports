@@ -19,6 +19,7 @@
 			  }
 			}
 		</script>
+		<script src="https://cdn.jsdelivr.net/npm/dat.gui@0.7.6/build/dat.gui.min.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -26,11 +27,12 @@
 			<div id="wrapper" class="fade-in">
 
 				<!-- Intro -->
-					<div id="intro">
+				<div id="intro">
 
+					<div id="renderMain"></div>
 						<blockquote id="daily-proverb" > </blockquote><!-- Proverb will be displayed here -->
 						<!-- <h1>Datalab108<br /></h1> -->
-						<p>Neuroscience | Cybernetics | Data Mining </p>
+						<p>Multidisciplinary Neuroscience</p>
 						<ul class="actions">
 							<li><a href="#nav" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 						</ul>
@@ -252,159 +254,432 @@
 
 
 		<script type="module">
-			import { WebGLRenderer, PerspectiveCamera, Scene, BoxGeometry, ShaderMaterial, Mesh, Vector2, Vector3 } from 'three';
-			// import { resolveLygia } from 'resolve-lygia';
-			import resolveLygia from "https://lygia.xyz/resolve.esm.js";
+			import * as THREE from 'three';
+			import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-			import { GlslPipeline } from './assets/js/index.js';
-	  
 			let W = window,
 				D = document;
-	  
-			let width = W.innerWidth;
-			let height = W.innerHeight;
-			let pixelRatio = W.devicePixelRatio;
-	  
-			const renderer = new WebGLRenderer();
-			renderer.setPixelRatio(pixelRatio);
-			renderer.setSize(width, height);
-			// D.body.appendChild(renderer.domElement);
-			// W.document.getElementById("intro").appendChild(renderer.domElement);
-			W.document.getElementById("intro").appendChild(renderer.domElement);
-	  
-			const shader_vert = resolveLygia(/* glsl */`
-			uniform float   u_time;
-			uniform vec2	u_mouse;
-	  
-			varying vec2    v_texcoord;
-			varying vec3    v_normal;
-			varying vec4    v_position;
-	  
-			#include "lygia/math/const.glsl"
-			#include "lygia/math/rotate4dX.glsl"
-			#include "lygia/math/rotate4dY.glsl"
-			#include "lygia/math/rotate4dZ.glsl"
-			#include "lygia/generative/snoise.glsl"
-	  
-			void main(void) {
-				v_position = vec4(position, 1.0);
-	  
-				float time = u_time * 2.0; // * u_mouse.x;
-	  
-				mat4 rot =  rotate4dY(time * 0.5) *
-							rotate4dX(time * 0.3) * 
-							rotate4dZ(time * 0.2);
-	  
-				v_position = rot * v_position;
-				// scale to fit the screen
-				v_position.xy *= 0.55;
-				// move a bit up
-				v_position.y += 0.55;
-	  
-				v_normal = normalize( (rot * vec4(normal,1.0)).xyz );
-				// create a bit of glitch on the normal with some noise and step function
-				// v_normal += snoise(v_position.xyz * 2.0) * step(0.5, snoise(v_position.xyz * 10.0));
-				
 
-				v_texcoord = uv;
-				// create a bit of glitch on the uv with some noise and step function
-				v_texcoord += snoise(v_position.xy * 2.0) * step(0.5, snoise(v_position.xy * 10.0));
-				
-				gl_Position = projectionMatrix * modelViewMatrix * v_position;
-			}
-			`);
-	  
-			const shader_frag = resolveLygia(/* glsl */`
-			uniform sampler2D   u_scene;
-			uniform sampler2D   u_doubleBuffer0;
-	  
-			uniform vec2        u_resolution;
-			uniform float       u_time;
-			uniform int         u_frame;
-			uniform vec2		u_mouse;
-	  
-			varying vec2        v_texcoord;
-			varying vec3        v_normal;
-			varying vec4        v_position;
-	  
-			#include "lygia/math/saturate.glsl"
-			#include "lygia/space/ratio.glsl"
-			#include "lygia/space/scale.glsl"
-			#include "lygia/color/mixOklab.glsl"
-			#include "lygia/generative/snoise.glsl"
+			const scene = new THREE.Scene();
+			const camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
+			const renderer = new THREE.WebGLRenderer({ alpha: true });
+			// renderer.setClearAlpha(0);
+
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			renderer.shadowMap.enabled = true;
+			renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Soft shadows
+
+			// document.body.appendChild(renderer.domElement);
+			W.document.getElementById("renderMain").appendChild(renderer.domElement);
+
+			const controls = new OrbitControls(camera, renderer.domElement);
+
+			// Optional: Configure controls
+			controls.enableDamping = true; 
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			// disable controls for now
+			controls.enableZoom = false;
+			controls.enablePan = false;
+			controls.enableRotate = false;
+
+			// auto-rotation 
+			controls.autoRotate = false;
+			controls.autoRotateSpeed = 0.5;
+
+			// Directional light
+			const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+			directionalLight.position.set(3, 4, 1.5);
+			directionalLight.castShadow = true; // Enable shadow casting
+			directionalLight.shadow.mapSize.width = 2048; // Shadow map width
+			directionalLight.shadow.mapSize.height = 2048; // Shadow map height
+			directionalLight.shadow.camera.near = 0.1; // Near shadow distance
+			directionalLight.shadow.camera.far = 500; // Far shadow distance
+			directionalLight.shadow.camera.left = -200; // Shadow camera left boundary
+			directionalLight.shadow.camera.right = 200; // Shadow camera right boundary
+			directionalLight.shadow.camera.top = 200; // Shadow camera top boundary
+			directionalLight.shadow.camera.bottom = -200; // Shadow camera bottom boundary
+			scene.add(directionalLight);
+
+			// Set the shadow bias to reduce self-shadowing
+			// directionalLight.shadow.bias = -0.001;
+
+			// Hemisphere light
+			const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.5);
+			scene.add(hemisphereLight);
+
+			const brainColor = 0xE2B4BD;
+			// const nodeColor = 0xF2B880;
+			const nodeColor = 0xFFBF69;
+			const connectionColor = 0xFFFFFF;
+
+			// Ambient light
+			const ambientLight = new THREE.AmbientLight(0xffffff, 0.35); 
+			scene.add(ambientLight);
+
 			
-			void main() {
-				vec4 color = vec4(vec3(0.0), 1.0);
-				vec2 pixel = 1.0 / u_resolution;
-				vec2 st = gl_FragCoord.xy * pixel;
-				vec2 sst = ratio(st, u_resolution); 
-				vec2 uv = v_texcoord;
-				float time = u_time;// * u_mouse.x; 
-	  
-			#if defined(BACKGROUND)
-				color.a = 0.0;
-	  
-			#elif defined(DOUBLE_BUFFER_0)
-				float n = snoise( vec3(sst * (1.5 + sin(time)) * 5.0, time * 0.5) ) * 0.0025;
-				vec2 st0 = scale(st, 1.0 + n);
-				color = texture2D(u_doubleBuffer0, st0);
-	  
-				vec4 scene = texture2D(u_scene, st);
-				color.rgb = mixOklab(color.rgb, scene.rgb, step(0.99,scene.a));
-				color.a = 0.01;
-				// color.rgb *= color.a;
-				color.rgb = scene.rgb;
-				
-	  
-			#elif defined(POSTPROCESSING)
-				color = texture2D(u_doubleBuffer0, st);
-	  
-			#else
-				color.rgb = v_normal * 0.5 + 0.5;
-				// color.rg = mix(color.rg, uv, saturate(distance(sst, vec2(0.5))*2. ) );
-				vec3 mapColor = vec3(1.0/(255./85.), 1.0/(255./70.), 1.0/(255./63.));
-				color.rgb = mix(color.rgb, mapColor.rgb, saturate(distance(sst, vec2(0.5))*2. ) );
-	  
-			#endif
-				// vec4 fcolor = vec4(color.rgb, .2);
-				// color.rgb *= vec3(1.0/(255./85.), 1.0/(255./70.), 1.0/(255./63.));
-				gl_FragColor = color;
+
+
+			// Create a floor
+			const floorGeometry = new THREE.PlaneGeometry(1000, 1000);
+			const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xFFF4EC, metalness: .2, roughness: 1.9, opacity: .25, transparent: true })
+			// const floorMaterial = new THREE.MeshPhongMaterial({ color: 0x424B54 });
+			const floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
+
+			// Rotate the floor to lie flat
+			floorMesh.rotation.x = -Math.PI / 2;
+			floorMesh.position.y = -100; // Adjust the position so it's below the brain
+
+			// Enable shadow casting for the floor
+			floorMesh.receiveShadow = true;
+			floorMesh.castShadow = false;
+
+			// Add the floor to the scene
+			scene.add(floorMesh);
+
+
+
+			// Create a placeholder for nodes and connections
+			const nodes = {}; 
+			const connections = []; 
+
+			const brainGroup = new THREE.Group();
+			scene.add(brainGroup);
+
+			// Lorenz Attractor parameters
+			let sigma = 10.0;
+			let rho = 28.0;
+			let beta = 8.0 / 3.0;
+			let x = 0.01, y = 0, z = 0; // Initial conditions
+
+			// Time step for the simulation
+			const dt = 0.01;
+
+
+			// Define parameters object
+			const parameters = {
+				sigma: 16.0,
+				rho: 44.0,
+				beta: 3.2,
+				cascadeDelay: 900 
+			};
+			
+			// Function to update Lorenz attractor parameters
+			function updateParameters() {
+				// Update Lorenz attractor parameters
+				sigma = parameters.sigma;
+				rho = parameters.rho;
+				beta = parameters.beta;
 			}
-			`);
-	  
-			// GLSL Buffers
-			const glsl_sandbox = new GlslPipeline(renderer);
-			glsl_sandbox.load(shader_frag, shader_vert);
-	  
-			const mesh = new Mesh(new BoxGeometry(1, 1, 1), glsl_sandbox.material);
-			const scene = new Scene();
-			const cam = new PerspectiveCamera(45, width / height, 0.001, 200);
-			cam.position.z = 3;
-			scene.add(mesh);
-	  
-			const draw = () => {
-				glsl_sandbox.renderScene(scene, cam);
-				requestAnimationFrame(draw);
-			};
-	  
-			const resize = () => {
-				width = W.innerWidth;
-				height = W.innerHeight;
-				pixelRatio = W.devicePixelRatio;
-	  
-				renderer.setPixelRatio(pixelRatio);
-				renderer.setSize(width, height);
-	  
-				glsl_sandbox.setSize(width, height);
-	  
-				cam.aspect = width / height;
-				cam.updateProjectionMatrix();
-			};
-	  
-			W.addEventListener("resize", resize);
-			resize();
-	  
-			draw();
+
+			// Create a new dat.GUI instance
+			const gui = new dat.GUI();
+			gui.close();
+
+			// Add sigma control
+			gui.add(parameters, 'sigma', 0, 30).name('Sigma').onChange(updateParameters);
+
+			// Add rho control
+			gui.add(parameters, 'rho', 0, 50).name('Rho').onChange(updateParameters);
+
+			// Add beta control
+			gui.add(parameters, 'beta', 0, 5).name('Beta').onChange(updateParameters);
+
+			// Add cascade delay control
+			gui.add(parameters, 'cascadeDelay', 0, 3000).name('Cascade Delay').onChange(value => {
+
+			parameters.cascadeDelay = value;
+			});
+
+			function loadAdditionalOBJ(filePath, color = 0x00ff00) {
+				const loader = new OBJLoader();
+				loader.load(filePath, function (object) {
+					object.traverse(function (child) {
+						if (child.type === 'Mesh') { 
+							const material = new THREE.MeshStandardMaterial({ color: color, metalness: 0.2, roughness: 0.6, opacity: 1.0, transparent: true });
+							child.material = material; 
+							child.castShadow = true;
+							
+							// scene.add(child); // Add the mesh to the scene directly
+							brainGroup.add(child); 
+						}
+					});
+				});
+			}
+
+			
+
+
+			function loadCSVData() {
+				fetch('con_epochs_matrix.csv')
+				.then(response => response.text())
+				.then(csvText => {
+					const data = parseCSV(csvText);
+					adjustNodeSizesBasedOnMaxWeight(data);
+					data.forEach(row => {
+						const sourceNode = nodes[row.source];
+						const targetNode = nodes[row.target];
+						if (!sourceNode || !targetNode) {
+							console.error(`Nodes not found for connection: ${row.source} to ${row.target}`);
+							return;
+						}
+						const weight = parseFloat(row.weight);
+						const opacity = Math.min(Math.max(weight / 10, 0.1), 1);
+
+						const material = new THREE.MeshStandardMaterial({
+							color: connectionColor,
+							metalness: 0.2,
+							roughness: 0.5,
+							transparent: true,
+							opacity: opacity * 5
+						});
+						const distance = sourceNode.position.distanceTo(targetNode.position);
+						const geometry = new THREE.CylinderGeometry(weight*0.9, weight*0.9, distance, 8);
+						const connection = new THREE.Mesh(geometry, material);
+
+						// Calculate midpoint for the position
+						const midpoint = new THREE.Vector3().addVectors(sourceNode.position, targetNode.position).multiplyScalar(0.5);
+						connection.position.copy(midpoint);
+
+						// Orient the connection to face the target node
+						connection.lookAt(targetNode.position);
+						connection.rotateX(Math.PI / 2); 
+						// Add the connection to the scene and store it
+						// scene.add(connection);
+						brainGroup.add(connection);
+						connections.push({ mesh: connection, weight: weight });
+
+						// cast shadow
+						connection.castShadow = true;
+					});
+				});
+			}
+
+			function parseCSV(csvText) {
+				// Trim the text to remove leading/trailing whitespace and split into lines
+				const lines = csvText.trim().split('\n');
+
+				// Process lines, skipping the header
+				const data = lines.slice(1).map(line => {
+					console.log("CSV Text:", csvText); 
+					
+					// Trim the line to ensure we don't process empty lines or lines with only whitespace
+					line = line.trim();
+					if (!line) return null; 
+
+					const parts = line.split(',').map(part => part ? part.trim() : '');
+					if (parts.length === 3) {
+						const [source, target, weight] = parts;
+						return { source, target, weight: parseFloat(weight) };
+					} else {
+						console.warn('Invalid line format:', line);
+						return null;
+					}
+				}).filter(row => row !== null); 
+
+				return data;
+			}
+
+
+			// Update function for the Lorenz attractor
+			function updateLorenzAttractor() {
+				const dx = sigma * (y - x) * dt;
+				const dy = (x * (rho - z) - y) * dt;
+				const dz = (x * y - beta * z) * dt;
+
+				x += dx;
+				y += dy;
+				z += dz;
+
+				// Return a value based on one of the attractor's variables to control the node size
+				return Math.abs(x % 3); 
+			}
+
+
+			function adjustNodeSizes() {
+				const lorenzValue = updateLorenzAttractor();
+				const currentTime = Date.now();
+
+				Object.keys(nodes).forEach(index => {
+					const node = nodes[index];
+					if (node) {
+
+						const maxWeight = node.maxWeight || 1; 
+
+						const delay = parameters.cascadeDelay * node.phase;
+						const timeSinceStart = (currentTime % 10000) - delay;
+
+						if (timeSinceStart > 0) {
+
+							const dynamicSize = Math.abs(Math.sin(timeSinceStart / 1000) * lorenzValue);
+							const newSize = Math.max(.1, dynamicSize + (maxWeight * 0.1)) + 2.5; 
+							node.scale.set(newSize, newSize, newSize);
+
+							// cast shadow
+							node.castShadow = true;
+							
+							// if (newSize > 2.5) {
+
+							// 	node.material.setValues({emissive: new THREE.Color(newSize*0.01, newSize*0.01, newSize*0.01) });
+							// 	node.material.setValues({color: new THREE.Color(nodeColor) });
+
+							// } else {
+							// 	node.material.setValues({emissive: new THREE.Color(0x000000) });
+							// 	node.material.setValues({color: new THREE.Color(nodeColor) });
+							// }
+							
+						}
+						
+					}
+				});
+			}
+
+
+
+			function adjustNodeSizesBasedOnMaxWeight(csvData) {
+				const maxWeights = {};
+
+				// Iterate through each row to find the maximum weight for each node
+				csvData.forEach(row => {
+					const source = parseInt(row.source, 10);
+					const target = parseInt(row.target, 10);
+					const weight = parseFloat(row.weight);
+
+					// Update the max weight for involved nodes
+					maxWeights[source] = Math.max(maxWeights[source] || 0, weight);
+					maxWeights[target] = Math.max(maxWeights[target] || 0, weight);
+				});
+
+				// Adjust each node's size based on the maximum weight it's involved in
+				Object.keys(nodes).forEach(index => {
+					const node = nodes[index];
+					const maxWeight = maxWeights[index];
+					if (node && maxWeight !== undefined) {
+						// Calculate new size; this formula can be adjusted as needed
+						const newSize = Math.max(0, maxWeight * 2.7); 
+						node.scale.set(newSize, newSize, newSize); 
+						// cast shadow
+						node.castShadow = true;
+					}
+				});
+
+			}
+
+			// Add a node phase property for the cascade effect
+			function initializeNodePhases() {
+				let phase = 0;
+				Object.keys(nodes).forEach(index => {
+					nodes[index].phase = phase;
+					console.log(`Node ${index} phase initialized to ${phase}`); 
+					phase++;
+				});
+			}
+
+			function loadOBJAndCreateNodes() {
+				return new Promise((resolve, reject) => {
+				const loader = new OBJLoader();
+				loader.load('rois4.obj', function (object) {
+					object.traverse(function (child) {
+						if (child.type === 'Points') { // Check if the child is a Points object
+							const vertices = child.geometry.attributes.position.array; // Access vertex positions
+							
+							// Create a material to use for the spheres
+							const material = new THREE.MeshStandardMaterial({ color: nodeColor, metalness: 0.1, roughness: 0.5 , opacity: 1.0, transparent: true });
+							// const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+
+							for (let i = 0; i < vertices.length; i += 3) {
+								// For each vertex, create a sphere
+								const geometry = new THREE.SphereGeometry(1, 32, 32);
+								
+								const sphere = new THREE.Mesh(geometry, material);
+								
+								// Set sphere position to the vertex position
+								sphere.position.set(vertices[i], vertices[i + 1], vertices[i + 2]);
+								sphere.castShadow = true;
+								
+								// Add sphere to the scene
+								// scene.add(sphere);
+								brainGroup.add(sphere);
+								
+								// Store reference to this node
+								nodes[i / 3] = sphere; 
+
+							}							
+
+						}
+					})
+					resolve(); 
+				}, undefined, function (error) {
+					reject(error); 
+				});
+				});
+			}
+
+
+
+			function animate() {
+				requestAnimationFrame(animate);
+				
+				// brainGroup.rotation.x = -(Math.PI / 2);
+				//  minus 15 degrees on x axis
+				brainGroup.rotation.x = (Math.PI / 12);
+				// move up brainGroup
+				brainGroup.position.y = 70;
+
+				adjustNodeSizes();
+
+				controls.update();
+				renderer.render(scene, camera);
+			}
+
+
+			loadOBJAndCreateNodes().then(() => {
+				return loadAdditionalOBJ('brain_lh.obj', brainColor);
+			}).then(() => {
+
+				loadCSVData();
+				
+				initializeNodePhases();
+				animate();
+			});
+			
+			// Set receiveShadow to true for objects
+			// brainGroup.traverse((child) => {
+			// 	if (child instanceof THREE.Mesh) {
+			// 		// child.receiveShadow = true;
+			// 		child.castShadow = true;
+			// 	}
+			// });
+
+			camera.position.z = 150;
+
+			// Define variables to track mouse position
+			let mouseX = 0;
+			let mouseY = 0;
+
+			// Function to handle mouse movement
+			function handleMouseMove(event) {
+				// Update mouseX and mouseY with the current mouse position relative to the window
+				mouseX = event.clientX / window.innerWidth * 2 - 1;
+				mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+				// Update camera position based on mouse position
+				// camera.position.x = mouseX * 50;
+				// camera.position.y = mouseY * 50;
+
+				// rotate abrain from -30 to 30 degrees based on mouse position x
+				// brainGroup.rotation.z = (mouseX * Math.PI / 6);
+				// brainGroup.rotation.x = -(mouseY * Math.PI / 6);
+				brainGroup.rotation.y = (mouseX * Math.PI / 6);
+
+				// Update camera lookAt position to center
+				camera.lookAt(0, 0, 0);
+			}
+
+			// Add event listener for mousemove event
+			window.addEventListener('mousemove', handleMouseMove);
+
 		  </script>
 
 			<script>
