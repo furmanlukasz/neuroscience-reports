@@ -95,6 +95,10 @@ Plots of ROIs are presented below:
     <img src="images/MCI_genlin/ROIs.png" alt="Segments" >
 </a>
 
+<a href="images/MCI_genlin/ROIs_flat.png">
+    <img src="images/MCI_genlin/ROIs_flat.png" alt="Segments" >
+</a>
+
 Fig.2 42 Regions of Interest (ROIs) used in the analysis. The ROIs are based on the `HCPMMP1_combined` atlas.
 
 
