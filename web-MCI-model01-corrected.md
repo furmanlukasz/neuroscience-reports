@@ -134,7 +134,7 @@ Fig.2 ROC AUC scores for XGBoost with Cross-Validation. Last fold.
 
 The analysis underscores a common theme across models: a significant capability to identify 'MCI-low' cases compared to 'MCI-high'. This disparity is particularly pronounced in recall and f1-score metrics for 'MCI-low', which consistently outperform those for 'MCI-high'. Such findings highlight the inherent challenge in distinguishing between varying levels of cognitive impairment, suggesting a need for further exploration and optimization of modeling techniques to achieve a balanced and effective classification strategy.
 
-**Edit**: Co
+**Edit**: Corrected results after fixing the data leakage, are presented below:
 
 <a href="images/MCI_genlin/LR_cv.png">
     <img src="images/MCI_genlin/LR_cv.png" alt="Segments" >

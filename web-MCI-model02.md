@@ -2,9 +2,9 @@
 
 ### Introduction
 
-This report delves into the predictive analysis of Mild Cognitive Impairment (MCI) severity, leveraging high-density EEG data combined with nuanced neuropsychological scoring. It extends previous research by incorporating advanced feature engineering techniques, including source analysis from the Human Connectome Project (HCP) combined atlas, and exploring the efficacy of machine learning models like Logistic Regression, SVMs, and XGBoost in distinguishing between MCI severity levels. 
+This report delves into the predictive analysis of Mild Cognitive Impairment (MCI) severity, leveraging high-density EEG data combined with nuanced neuropsychological scoring. It extends previous research by incorporating advanced feature engineering techniques, including source analysis from the Human Connectome Project (HCP) combined atlas, and exploring the efficacy of machine learning models like Logistic Regression, Random Forest, SVMs, and XGBoost in distinguishing between MCI severity levels. 
 
-This analysis integrates machine learning models to classify subjects into two groups based on the FRSSD total score, a functional scale indicating the severity of symptoms. The Functional Rating Scale for Symptoms of Dementia (FRSSD)[2] evaluate daily living skills affected by MCI across 14 dimensions, including eating, dressing, managing incontinence, communicating, sleeping, recognizing faces, maintaining personal hygiene, remembering names, recalling events, staying alert, understanding complex situations, knowing one's location, managing emotions, and interacting socially. The FRSSD assigns scores from 0 (no impairment) to 3 (severe impairment) for each activity, reflecting the individual's level of functional ability. It's important to note that this assessment is completed by caregivers, not the patients themselves, which means the scores might reflect the caregivers' perceptions and the impact of caregiving on their well-being. The scale uses a threshold score of 5 (authors recommendation) to distinguish between individuals who are likely healthy and those who may have dementia, providing a valuable tool for analysis of cognitive decline.
+Groups are based on the FRSSD total score, a functional scale indicating the severity of symptoms. The Functional Rating Scale for Symptoms of Dementia (FRSSD)[2] evaluate daily living skills affected by MCI across 14 dimensions, including eating, dressing, managing incontinence, communicating, sleeping, recognizing faces, maintaining personal hygiene, remembering names, recalling events, staying alert, understanding complex situations, knowing one's location, managing emotions, and interacting socially. The FRSSD assigns scores from 0 (no impairment) to 3 (severe impairment) for each activity, reflecting the individual's level of functional ability. It's important to note that this assessment is completed by caregivers, not the patients themselves, which means the scores might reflect the caregivers' perceptions and the impact of caregiving on their well-being. The scale uses a threshold score of 5 (authors recommendation) to distinguish between individuals who are likely healthy and those who may have dementia, providing a valuable tool for analysis of cognitive decline.
 
 In this analysis the cutoff score of 5 was not used, instead the participants were divided into two groups based on the FRSSD total score: a lower-score group (0-3) and a higher-score group (4 or higher).
 
@@ -12,15 +12,15 @@ In this analysis the cutoff score of 5 was not used, instead the participants we
     <img src="images/MCI_genlin/FRSSD.png" alt="Segments" >
 </a>
 
-Fig.1 Functional Rating Scale for Symptoms of Dementia (FRSSD) and the distribution of scores in the dataset across the subjects. The scores are divided into two groups: lower-score group ($0-3$) and higher-score group ($4$ or higher). No FRSSD tot score: $17$, FRSSD tot score $0-3: 32$, FRSSD tot score $>3: 28$.
+Fig.1 Functional Rating Scale for Symptoms of Dementia (FRSSD) and the distribution of scores in the dataset across the subjects. The scores are divided into two groups: lower-score group ($0-3$) and higher-score group ($4$ or higher). **No FRSSD tot score: $17$, FRSSD tot score $0<=3: 32$, FRSSD tot score $ >3: 28$.**
 
 
 
 ### Methodology
 
-The methodology involved preprocessing EEG data, source space analysis, extracting features, and linking these features with neuropsychological scores to create a comprehensive dataset. The dataset was then used to train and evaluate several machine learning models, including Logistic Regression, Support Vector Machines (SVM), and XGBoost, to classify subjects into two groups. The detailed steps for preprocessing the EEG data can be found in the [previous report](web-MCI-preproc02.md). 
+The methodology involved preprocessing EEG data, source space analysis, extracting features, and linking these features with neuropsychological scores to create a comprehensive dataset. The dataset was then used to train and evaluate several machine learning models, including Logistic Regression, Support Vector Machines (SVM), and XGBoost, to classify subjects into two groups. The detailed steps for preprocessing the EEG data can be found in the [previous report preproc02](web-MCI-preproc02.html) and [previous report model01](web-MCI-model01.html). 
 
-The study utilized preprocessed EEG segments, with source analysis conducted for each segment to extract bandpower features from 42 ROIs using the HCP_combined atlas. Features were calculated for different segments of subjects' EEG data, ensuring careful handling to avoid data leakage.
+The study utilized preprocessed EEG segments, with source analysis conducted for each multivariete timeseries segment to extract bandpower features from 42 ROIs using the HCP_combined atlas. Stratified sampling was ensured based on the groups and subject segments to avoid data leakage.
 
 Utilized a custom function to compute source time courses (STCs), employing sLORETA `ico4`, `snr 0.5` with `fsaverage` brain temaplate for inverse modeling and focusing on meaningful regions within the `HCPMMP1_combined` atlas using `MNE-Python` library[3]. The relative band powers and their ratios were calculated using the `yasa` library[6]. The features were standardized using the `StandardScaler` from the `sklearn` library. The dataset was split into training and testing sets, ensuring stratified sampling based on the groups and subject segments defined by FRSSD total scores. The models were trained and evaluated using accuracy and ROC AUC scores, with a focus on understanding the performance of each model in distinguishing between the unbalanced groups.
 
@@ -133,14 +133,12 @@ Fig.3 Correlation matrix of the relative band powers for the ROIs.
 
 #### Data Organization
 
-In the analysis, meticulous organization and preparation of the dataset for machine learning focused on EEG data to explore cognitive impairments were emphasized. Here is an overview of the approach:
-
-- **Data Structure**: The dataset (`eeg_data_df`) was categorized based on unique identifiers for each participant (`EEGCode`) and their respective group classifications, indicating different levels of cognitive impairment. This structured foundation ensured a systematic analysis.
+- **Data Structure**: The dataset (`eeg_data_df`) was categorized based on unique identifiers for each participant (`EEGCode`,`Segment_id`) and their respective group classifications, indicating different levels of cognitive impairment.
 
 - **Stratified Grouping**:
-  - Data was transformed into a format suitable for stratified sampling, with each entry corresponding to a participant and their classification group. This approach maintained proportionate representation of each group in both training and test sets.
-  - Using the `GroupKFold` function from the `sklearn` library, the dataset was stratified based on the groups and subject segments defined by FRSSD total scores.
-  - Specific datasets for training (`train_df`) and testing (`test_df`) were constructed, comprising relevant EEG data features and cognitive impairment classifications.
+  - Data was transformed into a format suitable for stratified sampling, with each entry corresponding to a participant and their classification group. 
+  - Using the `GroupKFold` function from the `sklearn` library, the dataset was stratified based on the `EEGCode` and subject `Segment_id` defined by FRSSD total scores.
+  - Specific datasets for training (`train_df`) and testing (`test_df`) were constructed.
 
 - **Training and Testing Sets**:
   - The training set included a wide range of EEG data and corresponding classifications for model training and validation.
@@ -162,18 +160,15 @@ Following the structured preparation of the dataset, several machine learning mo
 
 - **Logistic Regression without Class Weights CV5**: A logistic regression model was initialized and trained, applying scaled features from the training set. Predictions were then made on the scaled test set, with accuracy serving as the primary evaluation metric. This model served as a baseline for comparison.
 
-- **Logistic Regression with Class Weights CV5**: To address potential class imbalance, another logistic regression model was introduced, this time incorporating balanced class weights. After training, predictions were made on the test set, and the model's performance was evaluated based on accuracy and detailed through a classification report. Additionally, an ROC AUC curve was generated to visualize the model's ability to differentiate between classes, specifically targeting the 'MCI-low' group.
+- **Logistic Regression with Class Weights CV5**: To address potential class imbalance, another logistic regression model was introduced, this time incorporating balanced class weights. After training, predictions were made on the test set, and the model's performance was evaluated based on accuracy and detailed through a classification report. ROC AUC curve was generated to visualize the model's ability to differentiate between classes.
 
-- **Support Vector Machine (SVM) CV5**: An SVM classifier with an RBF & Linear kernel and balanced class weights was also trained, leveraging the scaled feature sets. The model's predictive accuracy was assessed, and its performance was further detailed in a classification report. An ROC AUC curve was plotted, providing insights into the SVM's discriminatory power between cognitive impairment levels.
+- **Support Vector Machine (SVM) CV5**: An SVM classifier with an RBF & Linear kernel, balanced class weights were trained, leveraging the scaled feature sets. The model's predictive accuracy was assessed, and its performance was further detailed in a classification report. An ROC AUC curve was plotted.
 
-- **XGBoost Classifier CV5**: The XGBoost model was employed next, using label-encoded class targets for training. This model's accuracy was evaluated, and its performance was summarized in a classification report, offering a nuanced view of its predictive capabilities across different classes.
+- **XGBoost Classifier CV5**: The XGBoost model was employed next, using label-encoded class targets for training. This model's accuracy was evaluated, and its performance was summarized in a classification report.
 
-- **Random Forest Classifier CV5**: A Random Forest model was trained and evaluated, leveraging the scaled feature sets. The model's accuracy was assessed, and its performance was detailed in a classification report, providing insights into its predictive capabilities across different classes.
+- **Random Forest Classifier CV5**: A Random Forest model was trained and evaluated, leveraging the scaled feature sets. 
 
-
-Throughout this extended analysis, the application of machine learning models, ranging from logistic regression to more complex approaches like XGBoost, underscores the nuanced exploration of cognitive impairments. By adjusting class weights and employing cross-validation, the study aimed to achieve balanced and insightful results, contributing to a deeper understanding of cognitive decline patterns.
-
-Sklearn's `LogisticRegression`, `LogisticRegression` and `SVC` were used to train the models. The `XGBoost` model was trained using the `xgboost` library. The `StratifiedKFold`, `GroupKFold` and `cross_val_score` functions from the `sklearn` library were used to perform cross-validation and calculate ROC AUC scores. The `classification_report` function from the `sklearn` library was used to generate detailed classification reports. The `roc_curve` and `roc_auc_score` functions from the `sklearn` library were used to plot ROC curves and calculate ROC AUC scores.
+`Sklearn`'s `LogisticRegression`, `Random Forest` and `SVC` were used to train the models. The `XGBoost` model was trained using the `xgboost` library. The `GroupKFold` and `cross_val_score` functions from the `sklearn` library were used to perform cross-validation and calculate ROC AUC scores. The `classification_report` function from the `sklearn` library was used to generate detailed classification reports. The `roc_curve` and `roc_auc_score` functions from the `sklearn` library were used to plot ROC curves and calculate ROC AUC scores.
 
 #### Interpretation of Model Performance
 
@@ -237,7 +232,7 @@ Analysis has revealed significant insights into the classification of Mild Cogni
 
 ### Discussion
 
-The endeavor to predict MCI severity using advanced feature engineering and machine learning models has encountered notable challenges, chief among them being the dataset's imbalance. The predominance of 'MCI-low' cases over 'MCI-high' cases (30912 vs. 12600) underscores the necessity for careful consideration in model training and evaluation to mitigate potential biases.
+The endeavor to predict MCI severity using advanced feature engineering and machine learning models has encountered notable challenges, chief among them being the dataset's imbalance. The predominance of 'MCI-low' cases over 'MCI-high' cases (30912 vs. 12600) underscores the necessity for careful consideration in model training and evaluation to mitigate potential biases. The importance of segments length and the number of segments per subject in the dataset was also observed.
 
 The variability in model performance, particularly the models' propensity to better identify 'MCI-low' cases, suggests a need for a nuanced approach in model selection and optimization. While models like XGBoost and SVM showed potential, their effectiveness was inconsistent across classifications, necessitating a critical evaluation of both the modeling strategies employed and the inherent dataset characteristics.
 

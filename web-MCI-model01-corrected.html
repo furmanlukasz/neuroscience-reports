@@ -26,7 +26,7 @@
         <div class="home-btn">
             <a href="index.html">
               <img src="images/home.png" alt="home" style="width: 50px; height: 50px;">
-            </a>  
+            </a>
 <h3 id="prediction-of-mild-cognitive-impairment-severity-using-eeg-data-and-neuropsychological-scores">Prediction of Mild Cognitive Impairment Severity Using EEG Data and Neuropsychological Scores </h3>
 <p><strong>Edit</strong>: After several reviews I found data leakage in the code. The data was not correctly split into training and testing sets. That is some features from one subject and different time segments were used in both training and testing sets, which is wrong. The code was corrected and the report was updated. The results are different, but the conclusions are the same. The data leakage was fixed and the results are more reliable.</p>
 <h3 id="introduction">Introduction </h3>
@@ -285,7 +285,7 @@ The first-order statistics were calculated using the <code>MNE-Python</code> lib
 </a>
 <p>Fig.2 ROC AUC scores for XGBoost with Cross-Validation. Last fold.</p>
 <p>The analysis underscores a common theme across models: a significant capability to identify 'MCI-low' cases compared to 'MCI-high'. This disparity is particularly pronounced in recall and f1-score metrics for 'MCI-low', which consistently outperform those for 'MCI-high'. Such findings highlight the inherent challenge in distinguishing between varying levels of cognitive impairment, suggesting a need for further exploration and optimization of modeling techniques to achieve a balanced and effective classification strategy.</p>
-<p><strong>Edit</strong>: Co</p>
+<p><strong>Edit</strong>: Corrected results after fixing the data leakage, are presented below:</p>
 <a href="images/MCI_genlin/LR_cv.png">
     <img src="images/MCI_genlin/LR_cv.png" alt="Segments">
 </a>
