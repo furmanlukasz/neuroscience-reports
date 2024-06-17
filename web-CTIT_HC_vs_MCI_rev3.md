@@ -124,9 +124,7 @@ To systematically derive PAC dynamics, a sliding window approach using Python's 
    \]
 
 5. **PAC Computation for Each Window**:
-   For
-
- each window \( i \) from 0 to \( N-1 \):
+   For each window \( i \) from 0 to \( N-1 \):
    \[
    \begin{aligned}
    \text{start}_i &= i \cdot s_{\text{samples}} \\
