@@ -268,4 +268,4 @@ Code repository: [github.com/furmanlukasz/MatrixAutoEncoder](https://github.com/
 
 ---
 
-**Note**: This article was developed as part of a methodology concept by Łukasz Furman, utilizing the Data Lab LLM Agent process. It integrates insights and knowledge from various sources, including GPT-4 Preview, Llama 3, and Claude Instant 3.5. Additionally, it incorporates text formatting and structuring processes to enhance clarity and coherence. ✨
+**Note**: This article is developed as part of a methodology concept by Łukasz Furman, utilizing the Data Lab LLM Agent process. It integrates insights and knowledge from various sources, including O1 Preview, LLAMA3, and Cloude Sonet 3.5. Additionally, it incorporates generated text formatting and structuring processes to enhance clarity and coherence. ✨
