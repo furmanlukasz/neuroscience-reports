@@ -1,0 +1,94 @@
+{
+  "RQA": {
+    "name": "Recurrence Quantitative Analysis",
+    "color": "#E2B4BD"
+  },
+  "TPM": {
+    "name": "Transition Probability Matrix",
+    "color": "#FFB69"
+  },
+  "Markov Chains": {
+    "name": "Markov Chains",
+    "color": "#F2B880"
+  },
+  "System Dynamics": {
+    "name": "System Dynamics",
+    "color": "#CBAC88"
+  },
+  "EEG Analysis": {
+    "name": "EEG Analysis",
+    "color": "#E2B4BD"
+  },
+  "Machine Learning": {
+    "name": "Machine Learning",
+    "color": "#FFB69"
+  },
+  "Classification": {
+    "name": "Classification",
+    "color": "#F2B880"
+  },
+  "MCI": {
+    "name": "Mild Cognitive Impairment",
+    "color": "#CBAC88"
+  },
+  "Alzheimer's": {
+    "name": "Alzheimer's Disease",
+    "color": "#E2B4BD"
+  },
+  "Schizophrenia": {
+    "name": "Schizophrenia",
+    "color": "#FFB69"
+  },
+  "Autoencoders": {
+    "name": "Autoencoders",
+    "color": "#F2B880"
+  },
+  "Deep Learning": {
+    "name": "Deep Learning",
+    "color": "#CBAC88"
+  },
+  "Microstates": {
+    "name": "Microstates",
+    "color": "#E2B4BD"
+  },
+  "Network Analysis": {
+    "name": "Network Analysis",
+    "color": "#FFB69"
+  },
+  "Source Localization": {
+    "name": "Source Localization",
+    "color": "#F2B880"
+  },
+  "EMD": {
+    "name": "Empirical Mode Decomposition",
+    "color": "#CBAC88"
+  },
+  "Cognitive Models": {
+    "name": "Cognitive Models",
+    "color": "#E2B4BD"
+  },
+  "PAC": {
+    "name": "Phase-Amplitude Coupling",
+    "color": "#FFB69"
+  },
+  "Preprocessing": {
+    "name": "Preprocessing",
+    "color": "#F2B880"
+  },
+  "Signal Processing": {
+    "name": "Signal Processing",
+    "color": "#CBAC88"
+  },
+  "Spectral Analysis": {
+    "name": "Spectral Analysis",
+    "color": "#E2B4BD"
+  },
+  "UMAP": {
+    "name": "UMAP",
+    "color": "#FFB69"
+  },
+  "Clustering": {
+    "name": "Clustering",
+    "color": "#F2B880"
+  }
+}
