@@ -1,0 +1,1000 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Datalab108</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/tags.css" />
+		<link rel="stylesheet" href="assets/css/enhanced.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script type="importmap">
+			{
+			  "imports": {
+				"three": "https://unpkg.com/three@0.157.0/build/three.module.js",
+				"three/addons/": "https://unpkg.com/three@0.157.0/examples/jsm/"
+			  }
+			}
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/dat.gui@0.7.6/build/dat.gui.min.js"></script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+				
+				<div id="intro">
+						<blockquote id="daily-proverb" > </blockquote><!-- Proverb will be displayed here -->
+						
+						<!-- <h1>Datalab108<br /></h1> -->
+						<!-- add spacer -->
+						
+						<div id="renderMain"></div>
+						<div style="height: 100px;"></div>
+						<p>Multidisciplinary Neuroscientist </p> 
+						<p>specializing in Brain Signal Analysis & Neural Engineering,</p> 
+						<p>focuses on understanding the brain's rhythms.</p>
+						<ul class="actions">
+							<li><a href="#nav" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+
+				<!-- Header -->
+					<!-- <header id="header">
+						<a href="index.html" class="logo">Datalab108</a>
+					</header> -->
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">Science Reports</a></li>
+							<li><a href="about.html">About</a></li>
+							<!-- <li><a href="elements.html">Elements Reference</a></li> -->
+						</ul>
+						<!-- <ul class="icons">
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul/Users/luki/Downloads/glsl-pipeline-bcd947519dade0c6ebb094d0937d49b8d0f16b75/index.js> -->
+					</nav>
+
+				
+        
+        <!-- Main -->
+        <div id="main">
+    
+        <div id="tag-filter" class="tag-filter">
+            <h3>Filter by Tags:</h3>
+            <div class="tags-container">
+                <button class="tag-button active" data-tag="all">All</button>
+                    <button class="tag-button" data-tag="Alzheimer's" style="border-color: #E2B4BD">Alzheimer's</button>
+                <button class="tag-button" data-tag="Autoencoders" style="border-color: #F2B880">Autoencoders</button>
+                <button class="tag-button" data-tag="Classification" style="border-color: #F2B880">Classification</button>
+                <button class="tag-button" data-tag="Clustering" style="border-color: #F2B880">Clustering</button>
+                <button class="tag-button" data-tag="Cognitive Models" style="border-color: #E2B4BD">Cognitive Models</button>
+                <button class="tag-button" data-tag="Deep Learning" style="border-color: #CBAC88">Deep Learning</button>
+                <button class="tag-button" data-tag="EEG Analysis" style="border-color: #E2B4BD">EEG Analysis</button>
+                <button class="tag-button" data-tag="EMD" style="border-color: #CBAC88">EMD</button>
+                <button class="tag-button" data-tag="MCI" style="border-color: #CBAC88">MCI</button>
+                <button class="tag-button" data-tag="Machine Learning" style="border-color: #FFB69">Machine Learning</button>
+                <button class="tag-button" data-tag="Markov Chains" style="border-color: #F2B880">Markov Chains</button>
+                <button class="tag-button" data-tag="Microstates" style="border-color: #E2B4BD">Microstates</button>
+                <button class="tag-button" data-tag="Network Analysis" style="border-color: #FFB69">Network Analysis</button>
+                <button class="tag-button" data-tag="PAC" style="border-color: #FFB69">PAC</button>
+                <button class="tag-button" data-tag="Preprocessing" style="border-color: #F2B880">Preprocessing</button>
+                <button class="tag-button" data-tag="RQA" style="border-color: #E2B4BD">RQA</button>
+                <button class="tag-button" data-tag="Schizophrenia" style="border-color: #FFB69">Schizophrenia</button>
+                <button class="tag-button" data-tag="Signal Processing" style="border-color: #CBAC88">Signal Processing</button>
+                <button class="tag-button" data-tag="Source Localization" style="border-color: #F2B880">Source Localization</button>
+                <button class="tag-button" data-tag="Spectral Analysis" style="border-color: #E2B4BD">Spectral Analysis</button>
+                <button class="tag-button" data-tag="System Dynamics" style="border-color: #CBAC88">System Dynamics</button>
+                <button class="tag-button" data-tag="TPM" style="border-color: #FFB69">TPM</button>
+                <button class="tag-button" data-tag="UMAP" style="border-color: #FFB69">UMAP</button>
+
+            </div>
+        </div>
+    
+            <!-- Featured Post -->
+            <article class="post featured">
+                <header class="major">
+                    <span class="date">2024-09-23</span>
+                    <h2><a href="web-EEGAutoencoder-01.html">Highlighting Temporal Patterns in Resting-State EEG</a></h2>
+                    <p>Autoencoder Latent Spaces and Multivariate Angular Distance Analysis</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="Autoencoders">Autoencoders</span> <span class="tag" data-tag="Deep Learning">Deep Learning</span> <span class="tag" data-tag="RQA">RQA</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span> <span class="tag" data-tag="Machine Learning">Machine Learning</span> <span class="tag" data-tag="UMAP">UMAP</span> <span class="tag" data-tag="Clustering">Clustering</span> <span class="tag" data-tag="MCI">MCI</span>
+                    </div>
+                </header>
+                <a href="web-EEGAutoencoder-01.html" class="image main"><img src="images/eeg-autoencoder/model.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="web-EEGAutoencoder-01.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <!-- Posts -->
+            <section class="posts">
+
+            <article class="post-item" data-tags='["RQA", "EEG Analysis", "MCI", "Network Analysis", "EMD", "Source Localization", "Signal Processing"]'>
+                <header class="major">
+                    <span class="date">2024-06-19</span>
+                    <h2><a href="web-RQA-STC-HC_vs_MCI.html">Recurrence Quantitative Analysis of EEG Data in Mild Cognitive Impairment</a></h2>
+                    <p>Focus on Default Mode and Executive Networks</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="RQA">RQA</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span> <span class="tag" data-tag="MCI">MCI</span> <span class="tag" data-tag="Network Analysis">Network Analysis</span> <span class="tag" data-tag="EMD">EMD</span> <span class="tag" data-tag="Source Localization">Source Localization</span> <span class="tag" data-tag="Signal Processing">Signal Processing</span>
+                    </div>
+                </header>
+                <a href="web-RQA-STC-HC_vs_MCI.html" class="image main"><img src="images/rqa_stc_hht/Pipeline.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="web-RQA-STC-HC_vs_MCI.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["PAC", "EEG Analysis", "MCI", "Network Analysis", "Source Localization", "Signal Processing"]'>
+                <header class="major">
+                    <span class="date">2024-06-17</span>
+                    <h2><a href="web-CTIT_HC_vs_MCI_rev3.html">Cortical-Thalamic Information Transfer in Mild Cognitive Impairment</a></h2>
+                    <p>A Study of Theta-Gamma and Alpha-Beta Coupling Dynamics</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="PAC">PAC</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span> <span class="tag" data-tag="MCI">MCI</span> <span class="tag" data-tag="Network Analysis">Network Analysis</span> <span class="tag" data-tag="Source Localization">Source Localization</span> <span class="tag" data-tag="Signal Processing">Signal Processing</span>
+                    </div>
+                </header>
+                <a href="web-CTIT_HC_vs_MCI_rev3.html" class="image main"><img src="images/ctit/pathwaysinfo.jpg" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="web-CTIT_HC_vs_MCI_rev3.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["Machine Learning", "Classification", "MCI", "EEG Analysis", "Source Localization", "Spectral Analysis"]'>
+                <header class="major">
+                    <span class="date">2024-03-04</span>
+                    <h2><a href="web-MCI-model02.html">Prediction of MCI in Source Space</a></h2>
+                    <p>Prediction of Mild Cognitive Impairment Severity Using EEG Data and Neuropsychological Scores in Source Space</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="Machine Learning">Machine Learning</span> <span class="tag" data-tag="Classification">Classification</span> <span class="tag" data-tag="MCI">MCI</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span> <span class="tag" data-tag="Source Localization">Source Localization</span> <span class="tag" data-tag="Spectral Analysis">Spectral Analysis</span>
+                    </div>
+                </header>
+                <a href="web-MCI-model02.html" class="image main"><img src="images/MCI_genlin/ROIs.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="web-MCI-model02.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["Machine Learning", "Classification", "MCI", "EEG Analysis", "Spectral Analysis"]'>
+                <header class="major">
+                    <span class="date">2024-02-14</span>
+                    <h2><a href="web-MCI-model01-corrected.html">Prediction of MCI</a></h2>
+                    <p>This analysis integrates machine learning models to classify subjects into two groups based on the MCI Neuropsychological score</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="Machine Learning">Machine Learning</span> <span class="tag" data-tag="Classification">Classification</span> <span class="tag" data-tag="MCI">MCI</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span> <span class="tag" data-tag="Spectral Analysis">Spectral Analysis</span>
+                    </div>
+                </header>
+                <a href="web-MCI-model01-corrected.html" class="image main"><img src="images/MCI_genlin/FRSSD.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="web-MCI-model01-corrected.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["Preprocessing", "EEG Analysis", "MCI", "Spectral Analysis", "Signal Processing"]'>
+                <header class="major">
+                    <span class="date">2024-02-04</span>
+                    <h2><a href="web-MCI-preproc02.html">Preprocessing of HD-EEG Recordings in Mild Cognitive Impairment (Revision 2)</a></h2>
+                    <p>First Order Features & Spectral Analysis of EEG Recordings in Mild Cognitive Impairment</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="Preprocessing">Preprocessing</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span> <span class="tag" data-tag="MCI">MCI</span> <span class="tag" data-tag="Spectral Analysis">Spectral Analysis</span> <span class="tag" data-tag="Signal Processing">Signal Processing</span>
+                    </div>
+                </header>
+                <a href="web-MCI-preproc02.html" class="image main"><img src="images/MCI_subsel/i052_20150709_1121_good_4_spectral.jpg" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="web-MCI-preproc02.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["Preprocessing", "EEG Analysis", "MCI", "Spectral Analysis", "Signal Processing"]'>
+                <header class="major">
+                    <span class="date">2024-01-26</span>
+                    <h2><a href="web-MCI-preproc01.html">Preprocessing of HD-EEG Recordings in Mild Cognitive Impairment</a></h2>
+                    <p>First Order Features & Spectral Analysis of EEG Recordings in Mild Cognitive Impairment</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="Preprocessing">Preprocessing</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span> <span class="tag" data-tag="MCI">MCI</span> <span class="tag" data-tag="Spectral Analysis">Spectral Analysis</span> <span class="tag" data-tag="Signal Processing">Signal Processing</span>
+                    </div>
+                </header>
+                <a href="web-MCI-preproc01.html" class="image main"><img src="images/MCI_figures/bandpowers_2nd_iter.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="web-MCI-preproc01.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["Microstates", "Schizophrenia", "EEG Analysis", "System Dynamics", "Markov Chains"]'>
+                <header class="major">
+                    <span class="date">2024-01-15</span>
+                    <h2><a href="web-traids.html">EEG Microstates Triads in Schizophrenia</a></h2>
+                    <p>Comparison of Healthy and Schizophrenia Triads from Microstates Sequences</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="Microstates">Microstates</span> <span class="tag" data-tag="Schizophrenia">Schizophrenia</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span> <span class="tag" data-tag="System Dynamics">System Dynamics</span> <span class="tag" data-tag="Markov Chains">Markov Chains</span>
+                    </div>
+                </header>
+                <a href="web-traids.html" class="image main"><img src="images/triads/mainph.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="web-traids.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["Microstates", "Schizophrenia", "EEG Analysis", "System Dynamics"]'>
+                <header class="major">
+                    <span class="date">2023-12-22</span>
+                    <h2><a href="state-distributions.html">State Distributions in Schizophrenia</a></h2>
+                    <p>EEG Microstate Sequences: A Visual Exploration of State Distributions</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="Microstates">Microstates</span> <span class="tag" data-tag="Schizophrenia">Schizophrenia</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span> <span class="tag" data-tag="System Dynamics">System Dynamics</span>
+                    </div>
+                </header>
+                <a href="state-distributions.html" class="image main"><img src="images/distributions/schizo_violin.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="state-distributions.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["TPM", "Classification", "Machine Learning", "Schizophrenia", "Markov Chains", "System Dynamics"]'>
+                <header class="major">
+                    <span class="date">2023-12-13</span>
+                    <h2><a href="classification.html">Classification in Schizophrenia</a></h2>
+                    <p>Classification of Transition Probability Matrix (TPM) between Healthy and Schizophrenia Groups</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="TPM">TPM</span> <span class="tag" data-tag="Classification">Classification</span> <span class="tag" data-tag="Machine Learning">Machine Learning</span> <span class="tag" data-tag="Schizophrenia">Schizophrenia</span> <span class="tag" data-tag="Markov Chains">Markov Chains</span> <span class="tag" data-tag="System Dynamics">System Dynamics</span>
+                    </div>
+                </header>
+                <a href="classification.html" class="image main"><img src="images/classification/classification.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="classification.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["TPM", "Schizophrenia", "Markov Chains", "System Dynamics", "Microstates"]'>
+                <header class="major">
+                    <span class="date">2023-12-11</span>
+                    <h2><a href="transition-probability-matrix.html">Transition Probability Matrix (TPM) in schizophrenia</a></h2>
+                    <p>EEG Microstate Sequences → Transition Probability Matrix (TPM)</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="TPM">TPM</span> <span class="tag" data-tag="Schizophrenia">Schizophrenia</span> <span class="tag" data-tag="Markov Chains">Markov Chains</span> <span class="tag" data-tag="System Dynamics">System Dynamics</span> <span class="tag" data-tag="Microstates">Microstates</span>
+                    </div>
+                </header>
+                <a href="transition-probability-matrix.html" class="image main"><img src="images/transition/transition_probabilities_no_self.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="transition-probability-matrix.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["Microstates", "Schizophrenia", "System Dynamics", "EEG Analysis"]'>
+                <header class="major">
+                    <span class="date">2023-12-09</span>
+                    <h2><a href="correlation-matrices.html">correlations & differences in schizophrenia</a></h2>
+                    <p>Correlation Matrices of EEG Microstate Sequences in Healthy and Schizophrenic Individuals</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="Microstates">Microstates</span> <span class="tag" data-tag="Schizophrenia">Schizophrenia</span> <span class="tag" data-tag="System Dynamics">System Dynamics</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span>
+                    </div>
+                </header>
+                <a href="correlation-matrices.html" class="image main"><img src="images/transition/correlation_matrices.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="correlation-matrices.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            <article class="post-item" data-tags='["Microstates", "Schizophrenia", "System Dynamics", "Network Analysis", "EEG Analysis"]'>
+                <header class="major">
+                    <span class="date">2023-12-06</span>
+                    <h2><a href="motifs.html">microstates dynamics in schizophrenia</a></h2>
+                    <p>This study explores the analysis of EEG signals to understand brain microstates and their dynamics in schizophrenia.</p>
+                    <div class="post-tags">
+                        <span class="tag" data-tag="Microstates">Microstates</span> <span class="tag" data-tag="Schizophrenia">Schizophrenia</span> <span class="tag" data-tag="System Dynamics">System Dynamics</span> <span class="tag" data-tag="Network Analysis">Network Analysis</span> <span class="tag" data-tag="EEG Analysis">EEG Analysis</span>
+                    </div>
+                </header>
+                <a href="motifs.html" class="image main"><img src="images/healthy_schizo_graphs.png" alt="" /></a>
+                <ul class="actions special">
+                    <li><a href="motifs.html" class="button small">Full Story</a></li>
+                </ul>
+            </article>
+        
+            </section>
+
+        </div>
+    <!-- Footer -->
+							<footer>
+								<!-- <div class="pagination">
+									<a href="#" class="previous">Prev</a>
+									<a href="#" class="page active">1</a>
+									<a href="#" class="page">2</a>
+									<a href="#" class="page">3</a>
+									<span class="extra">&hellip;</span>
+									<a href="#" class="page">8</a>
+									<a href="#" class="page">9</a>
+									<a href="#" class="page">10</a>
+									<a href="#" class="next">Next</a>
+								</div> -->
+							</footer>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/album/idea-10-slowed-reverb/1648562802?i=1648562803"></iframe>
+							<!-- <form method="post" action="#">
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="text" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="3"></textarea>
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form> -->
+						</section>
+						<section class="split contact">
+							
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">cracer.net@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<!-- <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li> -->
+									<!-- <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li> -->
+									<!-- <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li> -->
+									<li><a href="https://github.com/furmanlukasz" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Furman Łukasz</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+
+
+		<script type="module">
+			import * as THREE from 'three';
+			import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+			import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+			import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+			import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+			// import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+			// import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+			// import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+
+
+
+			let W = window,
+				D = document;
+			let effect;
+
+			const scene = new THREE.Scene();
+			const camera = new THREE.PerspectiveCamera(110, window.innerWidth / window.innerHeight, 0.1, 1000);
+			// const renderer = new THREE.WebGLRenderer({ alpha: true });
+			// renderer.setPixelRatio( window.devicePixelRatio )
+
+			const renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+			renderer.setPixelRatio( window.devicePixelRatio );
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.toneMapping = THREE.ReinhardToneMapping;
+
+			renderer.shadowMap.enabled = true;
+			renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Soft shadows
+
+			// document.body.appendChild(renderer.domElement);
+			W.document.getElementById("renderMain").appendChild(renderer.domElement);
+
+
+			const controls = new OrbitControls(camera, renderer.domElement);
+
+			// Optional: Configure controls
+			controls.enableDamping = true; 
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
+			// disable controls for now
+			controls.enableZoom = false;
+			controls.enablePan = false;
+			controls.enableRotate = false;
+
+			// auto-rotation 
+			controls.autoRotate = false;
+			controls.autoRotateSpeed = 0.05;
+
+			// Directional light
+			const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+			directionalLight.position.set(3, 4, 1.5);
+			directionalLight.castShadow = true; // Enable shadow casting
+			directionalLight.shadow.mapSize.width = 2048; // Shadow map width
+			directionalLight.shadow.mapSize.height = 2048; // Shadow map height
+			directionalLight.shadow.camera.near = 0.1; // Near shadow distance
+			directionalLight.shadow.camera.far = 500; // Far shadow distance
+			directionalLight.shadow.camera.left = -200; // Shadow camera left boundary
+			directionalLight.shadow.camera.right = 200; // Shadow camera right boundary
+			directionalLight.shadow.camera.top = 200; // Shadow camera top boundary
+			directionalLight.shadow.camera.bottom = -200; // Shadow camera bottom boundary
+			scene.add(directionalLight);
+			scene.fog = new THREE.FogExp2(0xCBAC88, 0.0015);
+
+
+			// Set the shadow bias to reduce self-shadowing
+			// directionalLight.shadow.bias = -0.001;
+
+			// Hemisphere light
+			const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.6);
+			scene.add(hemisphereLight);
+
+			const brainColor = 0xE2B4BD;
+			// const nodeColor = 0xF2B880;
+			const nodeColor = 0xFFBF69;
+			const connectionColor = 0xFFFFFF;
+
+			// Ambient light
+			const ambientLight = new THREE.AmbientLight(0xffffff, 0.35); 
+			scene.add(ambientLight);
+
+			
+
+
+			// Create a floor
+			const floorGeometry = new THREE.PlaneGeometry(1000, 1000);
+			const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xFFF4EC, metalness: .7, roughness: 1.9, opacity: .25, transparent: true })
+			// const floorMaterial = new THREE.MeshPhongMaterial({ color: 0x424B54 });
+			const floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
+
+			// Rotate the floor to lie flat
+			floorMesh.rotation.x = -Math.PI / 2;
+			floorMesh.position.y = -300; // Adjust the position so it's below the brain
+
+			// Enable shadow casting for the floor
+			floorMesh.receiveShadow = true;
+			floorMesh.castShadow = false;
+
+			// Add the floor to the scene
+			scene.add(floorMesh);
+
+			// Create a wall behind the brain
+			const wallGeometry = new THREE.PlaneGeometry(1000, 1000);
+			const wallMaterial = new THREE.MeshStandardMaterial({ color: 0xFFF4EC, metalness: .7, roughness: 1.9, opacity: .25, transparent: true })
+			// const wallMaterial = new THREE.MeshPhongMaterial({ color: 0x424B54 });
+			const wallMesh = new THREE.Mesh(wallGeometry, wallMaterial);
+
+			// Rotate the wall to lie flat
+			// wallMesh.rotation.x = -Math.PI / 2;
+			// wallMesh.position.y = 0; // Adjust the position so it's below the brain
+			wallMesh.position.z = -50; // Adjust the position so it's behind the brain
+
+			// Enable shadow casting for the wall
+			wallMesh.receiveShadow = true;
+			wallMesh.castShadow = false;
+
+			// Add the wall to the scene
+			scene.add(wallMesh);
+
+
+
+			// Create a placeholder for nodes and connections
+			const nodes = {}; 
+			const connections = []; 
+
+			const brainGroup = new THREE.Group();
+			scene.add(brainGroup);
+
+			// Lorenz Attractor parameters
+			let sigma = 10.0;
+			let rho = 28.0;
+			let beta = 8.0 / 3.0;
+			let x = 0.01, y = 0, z = 0; // Initial conditions
+
+			// Time step for the simulation
+			const dt = 0.01;
+
+
+			// Define parameters object
+			const parameters = {
+				sigma: 16.0,
+				rho: 44.0,
+				beta: 3.2,
+				cascadeDelay: 900 
+			};
+			
+
+			var params = {
+				exposure: 1.6,
+				bloomStrength: 1.2,
+				bloomThreshold: 0.23,
+				bloomRadius: 1.2
+			};
+
+			var renderScene = new RenderPass( scene, camera );
+
+			var bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), .5, 0.4, 0.85 );
+			bloomPass.threshold = params.bloomThreshold;
+			bloomPass.strength = params.bloomStrength;
+			bloomPass.radius = params.bloomRadius;
+
+			var composer = new EffectComposer( renderer );
+			composer.addPass( renderScene );
+			composer.addPass( bloomPass )
+
+			// Function to update Lorenz attractor parameters
+			function updateParameters() {
+				// Update Lorenz attractor parameters
+				sigma = parameters.sigma;
+				rho = parameters.rho;
+				beta = parameters.beta;
+			}
+
+			// Create a new dat.GUI instance
+			const gui = new dat.GUI();
+			gui.close();
+
+			// Add sigma control
+			gui.add(parameters, 'sigma', 0, 30).name('Sigma').onChange(updateParameters);
+
+			// Add rho control
+			gui.add(parameters, 'rho', 0, 50).name('Rho').onChange(updateParameters);
+
+			// Add beta control
+			gui.add(parameters, 'beta', 0, 5).name('Beta').onChange(updateParameters);
+
+			// Add cascade delay control
+			gui.add(parameters, 'cascadeDelay', 0, 3000).name('Cascade Delay').onChange(value => {
+
+			parameters.cascadeDelay = value;
+			});
+
+
+
+
+
+			function loadAdditionalOBJ(filePath, color = 0x00ff00) {
+				const loader = new OBJLoader();
+				loader.load(filePath, function (object) {
+					object.traverse(function (child) {
+						if (child.type === 'Mesh') { 
+							const material = new THREE.MeshStandardMaterial({ color: color, metalness: 0.2, roughness: 0.6, opacity: 1.0, transparent: true });
+							child.material = material; 
+							child.castShadow = true;
+							
+							// scene.add(child); // Add the mesh to the scene directly
+							brainGroup.add(child); 
+						}
+					});
+				});
+			}
+
+			
+
+
+			function loadCSVData() {
+				fetch('con_epochs_matrix.csv')
+				.then(response => response.text())
+				.then(csvText => {
+					const data = parseCSV(csvText);
+					adjustNodeSizesBasedOnMaxWeight(data);
+					data.forEach(row => {
+						const sourceNode = nodes[row.source];
+						const targetNode = nodes[row.target];
+						if (!sourceNode || !targetNode) {
+							console.error(`Nodes not found for connection: ${row.source} to ${row.target}`);
+							return;
+						}
+						const weight = parseFloat(row.weight);
+						const opacity = Math.min(Math.max(weight / 10, 0.1), 1);
+
+						const material = new THREE.MeshStandardMaterial({
+							color: connectionColor,
+							metalness: 0.2,
+							roughness: 0.5,
+							transparent: true,
+							opacity: opacity * 5
+						});
+						const distance = sourceNode.position.distanceTo(targetNode.position);
+						const geometry = new THREE.CylinderGeometry(weight*0.9, weight*0.9, distance, 8);
+						const connection = new THREE.Mesh(geometry, material);
+
+						// Calculate midpoint for the position
+						const midpoint = new THREE.Vector3().addVectors(sourceNode.position, targetNode.position).multiplyScalar(0.5);
+						connection.position.copy(midpoint);
+
+						// Orient the connection to face the target node
+						connection.lookAt(targetNode.position);
+						connection.rotateX(Math.PI / 2); 
+						// Add the connection to the scene and store it
+						// scene.add(connection);
+						brainGroup.add(connection);
+						connections.push({ mesh: connection, weight: weight });
+
+						// cast shadow
+						connection.castShadow = true;
+					});
+				});
+			}
+
+			function parseCSV(csvText) {
+				// Trim the text to remove leading/trailing whitespace and split into lines
+				const lines = csvText.trim().split('\n');
+
+				// Process lines, skipping the header
+				const data = lines.slice(1).map(line => {
+					console.log("CSV Text:", csvText); 
+					
+					// Trim the line to ensure we don't process empty lines or lines with only whitespace
+					line = line.trim();
+					if (!line) return null; 
+
+					const parts = line.split(',').map(part => part ? part.trim() : '');
+					if (parts.length === 3) {
+						const [source, target, weight] = parts;
+						return { source, target, weight: parseFloat(weight) };
+					} else {
+						console.warn('Invalid line format:', line);
+						return null;
+					}
+				}).filter(row => row !== null); 
+
+				return data;
+			}
+
+
+			// Update function for the Lorenz attractor
+			function updateLorenzAttractor() {
+				const dx = sigma * (y - x) * dt;
+				const dy = (x * (rho - z) - y) * dt;
+				const dz = (x * y - beta * z) * dt;
+
+				x += dx;
+				y += dy;
+				z += dz;
+
+				// Return a value based on one of the attractor's variables to control the node size
+				return Math.abs(x % 3); 
+			}
+
+
+			function adjustNodeSizes() {
+				const lorenzValue = updateLorenzAttractor();
+				const currentTime = Date.now();
+
+				Object.keys(nodes).forEach(index => {
+					const node = nodes[index];
+					if (node) {
+
+						const maxWeight = node.maxWeight || 1; 
+
+						const delay = parameters.cascadeDelay * node.phase;
+						const timeSinceStart = (currentTime % 10000) - delay;
+
+						if (timeSinceStart > 0) {
+
+							const dynamicSize = Math.abs(Math.sin(timeSinceStart / 1000) * lorenzValue);
+							const newSize = Math.max(.1, dynamicSize + (maxWeight * 0.1)) + 2.5; 
+							node.scale.set(newSize, newSize, newSize);
+
+							// cast shadow
+							node.castShadow = true;
+							
+							// if (newSize > 2.5) {
+
+							// 	node.material.setValues({emissive: new THREE.Color(newSize*0.01, newSize*0.01, newSize*0.01) });
+							// 	node.material.setValues({color: new THREE.Color(nodeColor) });
+
+							// } else {
+							// 	node.material.setValues({emissive: new THREE.Color(0x000000) });
+							// 	node.material.setValues({color: new THREE.Color(nodeColor) });
+							// }
+							
+						}
+						
+					}
+				});
+			}
+
+
+
+			function adjustNodeSizesBasedOnMaxWeight(csvData) {
+				const maxWeights = {};
+
+				// Iterate through each row to find the maximum weight for each node
+				csvData.forEach(row => {
+					const source = parseInt(row.source, 10);
+					const target = parseInt(row.target, 10);
+					const weight = parseFloat(row.weight);
+
+					// Update the max weight for involved nodes
+					maxWeights[source] = Math.max(maxWeights[source] || 0, weight);
+					maxWeights[target] = Math.max(maxWeights[target] || 0, weight);
+				});
+
+				// Adjust each node's size based on the maximum weight it's involved in
+				Object.keys(nodes).forEach(index => {
+					const node = nodes[index];
+					const maxWeight = maxWeights[index];
+					if (node && maxWeight !== undefined) {
+						// Calculate new size; this formula can be adjusted as needed
+						const newSize = Math.max(0, maxWeight * 2.7); 
+						node.scale.set(newSize, newSize, newSize); 
+						// cast shadow
+						node.castShadow = true;
+					}
+				});
+
+			}
+
+			// Add a node phase property for the cascade effect
+			function initializeNodePhases() {
+				let phase = 0;
+				Object.keys(nodes).forEach(index => {
+					nodes[index].phase = phase;
+					console.log(`Node ${index} phase initialized to ${phase}`); 
+					phase++;
+				});
+			}
+
+			function loadOBJAndCreateNodes() {
+				return new Promise((resolve, reject) => {
+				const loader = new OBJLoader();
+				loader.load('rois4.obj', function (object) {
+					object.traverse(function (child) {
+						if (child.type === 'Points') { // Check if the child is a Points object
+							const vertices = child.geometry.attributes.position.array; // Access vertex positions
+							
+							// Create a material to use for the spheres
+							const material = new THREE.MeshStandardMaterial({ color: nodeColor, metalness: 0.1, roughness: 0.5 , opacity: 1.0, transparent: true });
+							// const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+
+							for (let i = 0; i < vertices.length; i += 3) {
+								// For each vertex, create a sphere
+								const geometry = new THREE.SphereGeometry(1, 32, 32);
+								
+								const sphere = new THREE.Mesh(geometry, material);
+								
+								// Set sphere position to the vertex position
+								sphere.position.set(vertices[i], vertices[i + 1], vertices[i + 2]);
+								sphere.castShadow = true;
+								
+								// Add sphere to the scene
+								// scene.add(sphere);
+								brainGroup.add(sphere);
+								
+								// Store reference to this node
+								nodes[i / 3] = sphere; 
+
+							}							
+
+						}
+					})
+					resolve(); 
+				}, undefined, function (error) {
+					reject(error); 
+				});
+				});
+			}
+
+
+
+			function animate() {
+				requestAnimationFrame(animate);
+				
+				// brainGroup.rotation.x = -(Math.PI / 2);
+				//  minus 15 degrees on x axis
+				// brainGroup.rotation.x = (Math.PI / 12);
+				// move up brainGroup
+				
+				brainGroup.position.y = -(Math.PI / 2);
+
+				//  Rotate the brain group
+				// brainGroup.rotation.z += 0.001;
+				adjustNodeSizes();
+
+				controls.update();
+				composer.render(scene, camera );
+				// effect.render( scene, camera );
+				// effect_cb.render( scene, camera );
+				// renderer.render(scene, camera);
+			}
+
+
+
+			loadOBJAndCreateNodes().then(() => {
+				return loadAdditionalOBJ('brain_lh_low.obj', brainColor);
+			}).then(() => {
+
+				loadCSVData();
+				
+				initializeNodePhases();
+				brainGroup.scale.set(2, 2, 2);
+				brainGroup.position.set(0, 0, -10);
+				
+				// brainGroup.position.y = 500;
+				animate();
+			});
+			
+
+
+			function lerp(a, b, t) {
+            return (1 - t) * a + t * b;
+     		}
+
+			camera.position.z = 250;
+			camera.position.y = 20;
+
+
+
+			// Define variables to track mouse position
+			let mouseX = 0;
+			let mouseY = 0;
+
+			// Function to handle mouse movement
+			function handleMouseMove(event) {
+				// Update mouseX and mouseY with the current mouse position relative to the window
+				mouseX = event.clientX / window.innerWidth * 2 - 1;
+				mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+				// Update camera position based on mouse position
+				// camera.position.x = mouseX * 50;
+				// camera.position.y = mouseY * 50;
+
+				// rotate abrain from -30 to 30 degrees based on mouse position x
+				let rotationX = mouseX * Math.PI ;
+				brainGroup.rotation.y = lerp(brainGroup.rotation.z, rotationX, 0.04);
+
+
+				// brainGroup.rotation.x = -(mouseY * Math.PI / 6);
+				// brainGroup.rotation.y = (mouseX * Math.PI / 6);
+
+				// Update camera lookAt position to center
+
+				// camera.lookAt(0, 0, 0);
+			}
+
+			// Add event listener for mousemove event
+			window.addEventListener('mousemove', handleMouseMove);
+
+		  </script>
+
+			<script>
+				// Function to load proverbs and display a daily proverb
+				function loadDailyProverb() {
+					fetch('proverbs.json')
+						.then(response => response.json())
+						.then(proverbs => {
+							// Use current date to seed the random selection
+							const today = new Date();
+							const index = (today.getFullYear() + today.getMonth() + today.getDate()) % proverbs.length;
+			
+							// Select a proverb
+							const dailyProverb = proverbs[index];
+			
+							// Display the proverb
+							document.getElementById('daily-proverb').innerText = dailyProverb;
+						})
+						.catch(error => console.error('Error loading proverbs:', error));
+				}
+			
+				// Call the function on page load
+				window.onload = loadDailyProverb;
+			</script>
+			
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/enhanced.js"></script>
+
+
+    <script>
+    // Tag filtering functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const tagButtons = document.querySelectorAll('.tag-button');
+        const posts = document.querySelectorAll('.post-item');
+
+        tagButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const selectedTag = this.getAttribute('data-tag');
+
+                // Update active button
+                tagButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                // Filter posts
+                posts.forEach(post => {
+                    const postTags = JSON.parse(post.getAttribute('data-tags'));
+
+                    if (selectedTag === 'all' || postTags.includes(selectedTag)) {
+                        post.style.display = '';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Tag click in post
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.style.cursor = 'pointer';
+            tag.addEventListener('click', function() {
+                const tagName = this.getAttribute('data-tag');
+                const tagButton = document.querySelector(`.tag-button[data-tag="${tagName}"]`);
+                if (tagButton) {
+                    tagButton.click();
+                    // Scroll to filter
+                    document.getElementById('tag-filter').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    });
+    </script>
+    
+
+    <script>
+    // Tag filtering functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const tagButtons = document.querySelectorAll('.tag-button');
+        const posts = document.querySelectorAll('.post-item');
+
+        tagButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const selectedTag = this.getAttribute('data-tag');
+
+                // Update active button
+                tagButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                // Filter posts
+                posts.forEach(post => {
+                    const postTags = JSON.parse(post.getAttribute('data-tags'));
+
+                    if (selectedTag === 'all' || postTags.includes(selectedTag)) {
+                        post.style.display = '';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Tag click in post
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.style.cursor = 'pointer';
+            tag.addEventListener('click', function() {
+                const tagName = this.getAttribute('data-tag');
+                const tagButton = document.querySelector(`.tag-button[data-tag="${tagName}"]`);
+                if (tagButton) {
+                    tagButton.click();
+                    // Scroll to filter
+                    document.getElementById('tag-filter').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    });
+    </script>
+    
+</body>
+</html>
